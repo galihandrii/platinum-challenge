@@ -14,7 +14,7 @@ const Detailcar = (props) => {
         <div>
             <Navbar/>
             <div className="div-add"></div>
-            <Filter/>
+            <Filter />
             <Cardescription/>
             <Footer/>
         </div>

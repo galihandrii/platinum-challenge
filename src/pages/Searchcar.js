@@ -15,7 +15,8 @@ const Searchcar = () => {
     const [fName,setFname] = useState("");
     const [fCategory,setFcategory]= useState('');
     const [fStatus, setFstatus]= useState("");
-    const [fPrice,setFprice] = useState("");
+    const [fPricemin,setFpricemin] = useState("");
+    const [fPricemax,setFpricemax] = useState("");
 
     useEffect(()=>{
         axios
@@ -34,7 +35,7 @@ const Searchcar = () => {
     //console.log(fName);
     const handleFilter = (e) => {
         axios
-        .get(`https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?name=${fName}&category=${fCategory}&isRented=${fStatus}&minPrice=${fPrice}`)
+        .get(`https://bootcamp-rent-cars.herokuapp.com/customer/v2/car?name=${fName}&category=${fCategory}&isRented=${fStatus}&minPrice=${fPricemin}&maxPrice=${fPricemax}`)
         .then((res)=>{
             //console.log(res);
             setCardata(res.data.cars);
@@ -49,15 +50,18 @@ const Searchcar = () => {
     const handleChangeStatus = (e) => {
         setFstatus(e.target.value)
     }
-    const handleChangePrice = (e) => {
-        setFprice(e.target.value)
+    const handleChangePricemin = (e) => {
+        setFpricemin(e.target.value)
+    }
+    const handleChangePricemax = (e) => {
+        setFpricemax(e.target.value)
     }
 
     return (
         <div>
             <Navbar/>
             <Banner isBtnShow={false}/>
-            <Filter ishandlePrice={handleChangePrice} ishandleChangeName={handleChangeName} ishandleFilter={handleFilter} ishandleCategory={handleChangeCategory} ishandleStatus={handleChangeStatus}/>
+            <Filter  ishandlePricemax={handleChangePricemax} ishandlePricemin={handleChangePricemin} ishandleChangeName={handleChangeName} ishandleFilter={handleFilter} ishandleCategory={handleChangeCategory} ishandleStatus={handleChangeStatus}/>
              <div className="card-wraper">
              {
                 !!carData.length ? carData.map(function(item){
