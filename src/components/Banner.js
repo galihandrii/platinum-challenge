@@ -1,18 +1,27 @@
 import "./Banner.css"
 import carImage from "../assets/img_car.png"
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 
-const Banner = () => {
+const Banner = (props) => {
+    const [click, setClick] = useState(true)
+    const handleClick = () => {
+        setClick(false)
+    }
+
     return (
         <div className="banner-container">
             <div className="banner">
                 <div className="banner-left">
                     <h1>Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)</h1>
                     <p>Selamat datang di Binar Car Rental. Kami menyediakan mobil kualitas terbaik dengan harga terjangkau. Selalu siap melayani kebutuhanmu untuk sewa mobil selama 24 jam.</p>
-                    <Link to="/Carimobil">
-                    <button>Mulai Sewa Mobil</button>
-                    </Link>
+                    {
+                        props.isBtnShow ? (<Link to='/Carimobil'>
+                        <button onClick={handleClick}>Mulai Sewa Mobil</button>
+                        </Link>): null
+                    }
+                   
                     
                 </div>
                 <div className="banner-right">

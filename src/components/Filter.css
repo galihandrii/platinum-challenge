@@ -1,0 +1,27 @@
+
+.searchcar-filter{
+    display: flex;
+    padding: 36px;
+    justify-content:center;
+    gap: 16px;
+    width: 1300px;
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 3px grey;
+    position: relative;
+    bottom: 60px;
+    z-index: 1;
+    background-color: white;
+}
+
+.filter-name{
+    width: 320px;
+}
+
+.btn-success{
+    margin-top:42px ;
+    width: 120px;
+}
+.input{
+    margin-top: 10px;
+}

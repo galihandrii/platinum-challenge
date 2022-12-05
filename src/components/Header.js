@@ -5,7 +5,7 @@ const Header = () =>{
     return (
         <div>
            <Navbar/>
-            <Banner/>
+            <Banner isBtnShow={true}/>
         </div>
     )
 }
