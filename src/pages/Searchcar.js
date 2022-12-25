@@ -69,8 +69,9 @@ const Searchcar = () => {
                         <div className="card-car">
                             <div className="img-car"><img src={item.image}/></div>
                             <div className="item-con">
-                                 <h1>{item.name}</h1>
-                                <p>{item.price}/hari</p>
+                                 <h4>{item.name}</h4>
+                                <p><strong>Rp.{item.price}/hari</strong></p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                             </div>
                             <div>
                                     <Link to={`/Detailmobil/${item.id}`}>

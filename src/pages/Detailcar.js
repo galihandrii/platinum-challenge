@@ -2,7 +2,7 @@ import "./Detailcar.css"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import Cardescription from "../components/Cardescription";
-import Filter from "../components/Filter";
+import Filterdisable from "../components/Filterdisable";
 
 
 
@@ -14,7 +14,7 @@ const Detailcar = (props) => {
         <div>
             <Navbar/>
             <div className="div-add"></div>
-            <Filter />
+            <Filterdisable />
             <Cardescription/>
             <Footer/>
         </div>

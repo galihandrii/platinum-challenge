@@ -26,8 +26,8 @@ const Cardescription = () => {
                 {
                     id: 4,
                     include:"Sudah termasuk pajak",
-                    exclude: "",
-                    refund: "",
+                    exclude: "Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp.20.000/jam",
+                    refund: "Tidak termasuk biaya makan sopir Rp.75.000/hari",
                     },
     
     ]);
@@ -93,10 +93,10 @@ const Cardescription = () => {
             <div className="car-cards">
                 <div className="car-cards-img"><img src={car.image} alt={car.name}/></div>
                 <div className="car-cards-name">
-                    <h1>{car.name}</h1>
+                    <h3>{car.name}</h3>
                     <p>Total:<span>Rp.{car.price}</span></p>
                 </div>
-            </div>) : <h1>Loading....</h1>
+            </div>) : <h1 className="loading">Loading....</h1>
 
             }
             </div>

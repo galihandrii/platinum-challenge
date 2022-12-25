@@ -1,4 +1,4 @@
-.searchcar-filter{
+/*.searchcar-filter{
     display: flex;
     padding: 36px;
     justify-content:center;
@@ -6,12 +6,12 @@
     width: 1300px;
     margin: auto;
     border-radius: 20px;
-    box-shadow: 2px 2px 10px 3px grey;
+    box-shadow: 1px 1px 2px 1px blue;
     position: relative;
     bottom: 60px;
     z-index: 1;
     background-color: white;
-}
+}*/
 
 .filter-name{
     width: 320px;
@@ -27,5 +27,5 @@
 
 .div-add{
     background-color: #F1F3FF;
-    height: 300px;
+    height: 320px;
 }
