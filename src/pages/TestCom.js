@@ -1,10 +1,11 @@
 
 const TestCom = () => {
-    return (
-        <div>
-            <h1>test merge</h1>
-        </div>
-    )
+  return (
+    <div>TestCom
+        <h1>saya maunya gini</h1>
+        <h1>test merge</h1>
+    </div>
+  )
 }
 
-export default TestCom;
+export default TestCom
