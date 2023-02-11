@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer'
-import Rectangle36 from '../Rectangle_36.jpg';
-import BackSign from '../fi_arrow-left.png';
-import Check from '../check.svg';
-import Copy from '../copy.svg';
+import Rectangle36 from './assets/Rectangle_36'
+import BackSign from './assets/fi_arrow-left.png';
+import Check from '../assets/check.svg';
+import Copy from '../assets/copy.svg';
 import './PaymentList.css'
 
 const PaymentList = () => {
