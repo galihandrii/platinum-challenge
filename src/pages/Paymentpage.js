@@ -1,11 +1,8 @@
-import Paymentmethod from "../components/Paymentmethod";
-import "./Paymentpage.css";
-
 
 const Paymentpage = () => {
     return (
         <div>
-            <Paymentmethod/>
+            <h1>Payment Page</h1>
         </div>
     )
 }

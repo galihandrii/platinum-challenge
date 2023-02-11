@@ -205,7 +205,7 @@ const Cardescription = () => {
                                 <div className="cardesc-right-button">
                                 <HandleButton/>
                                 </div>
-                            </div>:
+                            </div>
                             
                            
                         
