@@ -2,9 +2,20 @@ import { useState, useEffect } from "react";
 import "./Cardescription.css"
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import {FiUsers, FiCalendar } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 
 const Cardescription = () => {
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
+    const {id} = useParams();
+    const [car,setCar]= useState({})
     const [description,setDescription] = useState([{
         id: 1,
         include:"apa saja yang termasuk dalam paket misal durasi max 12 jam",
@@ -32,8 +43,7 @@ const Cardescription = () => {
     
     ]);
 
-    const {id} = useParams();
-    const [car,setCar]= useState({})
+    
     
     useEffect(()=>{
         axios
@@ -45,6 +55,43 @@ const Cardescription = () => {
         .catch((err)=> console.log(err.message))
     },[])
     
+    function dotCurrency(number) {
+        const currency = number;
+        return new Intl.NumberFormat('de-DE').format(currency)
+    }
+
+    const isPrice = car.price
+        const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
+        const totalPrice = isPrice * (dateCount)
+
+    function PriceTotal(){
+        
+        if ((dateCount >= 0) && (dateCount < 7)) {
+            return dotCurrency(totalPrice)
+        } else if (dateCount < 0) {
+            return 0
+        } else {
+            return "- (Lebih dari 7 hari)"
+        }
+    }
+
+
+    function HandleButton() {
+      
+        if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
+            return(
+                <Link to={`/payment/${car.id}`} >
+                    <Button  variant="success">Lanjutkan Ke Pembayaran</Button>
+                </Link>
+            )
+        }  else  {
+            return(
+                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Pilih Tanggal Sewa</Tooltip>}>
+                    <Button variant="success" className="btn-disable-pick-date">Lanjutkan Ke Pembayaran</Button>
+                </OverlayTrigger>
+            ) 
+        }
+    }
    
     return(
         <div className="cardesc">
@@ -89,14 +136,82 @@ const Cardescription = () => {
             </div>
             <div className="cardesc-right">
             {
-            Object.entries(car).length ? (
-            <div className="car-cards">
-                <div className="car-cards-img"><img src={car.image} alt={car.name}/></div>
-                <div className="car-cards-name">
-                    <h3>{car.name}</h3>
-                    <p>Total:<span>Rp.{car.price}</span></p>
-                </div>
-            </div>) : <h1 className="loading">Loading....</h1>
+            Object.entries(car).length ? 
+            (
+                <div className="car-cards">
+                    <div className="car-cards-img"><img src={car.image} alt={car.name}/></div>
+                    <div className="car-cards-name">
+                        
+                    <div className="car-cards-name-price">
+                                <div>
+                                <h3>{car.name}</h3>
+                                <p className="p-category"><FiUsers size={14}/>
+                                <span className="span-category">
+                                {(() => {
+                                                    if (car.category === "small" ){
+                                                        return(
+                                                            '2-4 orang'
+                                                        )
+                                                    } else if (car.category === "Medium" ) {
+                                                        return(
+                                                            '4-6 orang'
+                                                        )
+                                                    } else if (car.category === "large" ) {
+                                                        return(
+                                                            '6-8 orang'
+                                                        )
+                                                    } else {
+                                                        return(
+                                                            '-'
+                                                        )
+                                                    }
+                                                })()}
+                                    
+                                    
+                                    </span><br/><br/>Tentukan lama sewa mobil (Max 7 hari)</p>
+                                       
+                                </div>
+                                
+    
+                                {/*========== Date Picker Zone ===========*/ }
+                                <div className="date-range">
+                                <DatePicker 
+                                selected={startDate} 
+                                onChange={(date) => {
+                                    const [start, end] = date;
+                                    setStartDate(start);
+                                    setEndDate(end);
+                                } 
+                                } 
+                                startDate={startDate}
+                                endDate={endDate}
+                                minDate={new Date()}
+                                selectsRange
+                                dateFormat="dd MMMM yyyy"
+                                isClearable={true}
+                                placeholderText="Pilih tanggal mulai dan tanggal akhir sewa"
+                                //showDisabledMonthNavigation
+                                />
+                                <span><FiCalendar size={20}/></span>
+                                </div>
+                                {/*========================================*/}
+    
+                                <div className="car-cards-name-price-top">
+                                    <p>Total:<span className="span-price">Rp {PriceTotal()}</span></p>
+                                </div>
+    
+                                
+    
+                                <div className="cardesc-right-button">
+                                <HandleButton/>
+                                </div>
+                            </div>:
+                            
+                           
+                        
+    
+                    </div>
+                </div>) : <h1 className="loading">Loading....</h1>
 
             }
             </div>
