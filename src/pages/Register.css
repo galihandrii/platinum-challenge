@@ -130,7 +130,7 @@
   .img-Auth {
     position: absolute;
     width: 568px;
-    height: 410px;
+    height: 422px;
     left: 115px;
     top: 233px;
   }
@@ -217,4 +217,6 @@
     text-decoration: none;
     color: #000000;
   }
+
+  
 }

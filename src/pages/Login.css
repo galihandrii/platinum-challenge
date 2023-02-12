@@ -1,0 +1,180 @@
+@media screen and (max-width: 600px) {
+    .p-graylogo {
+        margin-left: 16px;
+        margin-top: 29px;
+        width: 100px;
+        height: 34px;
+        background-color: #cfd4ed;
+    }
+
+    .p-titlelogin {
+        margin-top: 32px;
+        margin-left: 16px;
+        width: 178px;
+        height: 36px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    .p-Emaillogin {
+        margin-top: 32.07px;
+        width: 29px;
+        height: 20px;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left: 16px;
+    }
+
+    .input-emaillogin {
+        width: 328px;
+        height: 38px;
+        margin-left: 16px;
+    }
+
+    .p-passwordlogin {
+        width: 51px;
+        height: 20px;
+        margin-left: 16px;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 26px;
+    }
+
+    .input-paslogin {
+        width: 328px;
+        height: 38px;
+        margin-left: 16px;
+    }
+
+    .button-signin {
+       width: 328px;
+       height: 36px;
+       border-radius: 2px;
+       margin-top: 32px;
+       margin-left: 16px;
+       background-color:  #0D28A6;
+       border: 1px solid #0D28A6;
+       color: white;
+       cursor: pointer; 
+    }
+
+    .p-directsignUp {
+        margin-left: 8px;
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .div-content2 {
+        display: none;
+    }
+
+    .div-handleerror {
+      width: 370px;
+      height: 50px;
+      background-color: rgb(238, 72, 72);
+      color: white;
+      margin-left: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+}
+
+/* batas responsive */
+
+@media screen and (min-width: 601px) {
+  .div-content {
+    display: flex;
+    height: 100vh;
+  }
+
+  .div-loginAuth {
+    width: 50%;
+    height: 100vh;
+  }
+
+  .div-content2 {
+    width: 50%;
+    height: 100vh;
+    background-color:  #0D28A6;
+    position: relative;
+  }
+
+  .p-Auth-login {
+    font-size: 48px;
+    margin-top: 112px;
+    margin-left: 115px;
+    opacity: 70%;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 72px;
+  }
+
+  .p-graylogo {
+    margin-top: 120px;
+    margin-left: 150px;
+    width: 100px;
+    height: 34px;
+    background-color:  #CFD4ED;
+  }
+
+  .p-titlelogin {
+    margin-top: 25px;
+    margin-left: 150px;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+  }
+
+  .p-Emaillogin {
+    width: 29px;
+    height: 20px;
+    margin-left: 150px;
+  }
+
+  .input-emaillogin {
+    margin-left: 150px;
+    width: 370px;
+    height: 38.25px;
+    margin-top: 8.93px;
+  }
+
+  .p-passwordlogin {
+    width: 29px;
+    height: 20px;
+    margin-left: 150px;
+    margin-top: 16px;
+  }
+
+  .input-paslogin {
+    margin-left: 150px;
+    width: 370px;
+    height: 38.25px;
+    margin-top: 8.93px;
+  }
+
+   .button-signin {
+    margin-top: 25px;
+    width: 370px;
+    height: 36px;
+    border-radius: 2px;
+    color: white;
+    background-color: #0D28A6;
+    margin-left: 150px;
+    cursor: pointer;
+    border: 1px #0D28A6 solid;
+   }
+
+   .p-directsignUp {
+    margin-left: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0D28A6;
+   }
+}

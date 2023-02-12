@@ -18,14 +18,12 @@
     width: 68px;
 }
 .nav-list{
-    
-    height: 50px;
+    height: 70px;
     padding-top: 14px;
-    margin-right: 300px;
-    
+    margin-right: 100px;
 }
 .nav-list ul{
-    width:500px;
+    width: 700px;
     display: flex;
     gap: 40px;
 
@@ -56,6 +54,26 @@
     padding: 8px 12px 8px 12px;
     border-radius: 2px;
     color: white;
+    border-radius: 2px;
+    height: 40px;
+    margin-top: 1px;
+}
+
+.profile-navbar {
+        display: flex;
+        width: 220px;
+        height: 40px;
+        background-color: #5cb85f;
+        justify-content: center;
+        gap: 7px;
+        padding: 6px;
+        border-radius: 6px;
+}
+
+.p-profile {
+        margin-bottom: 10px;
+        font-family: sans-serif;
+        color: whitesmoke;
 }
 
 
