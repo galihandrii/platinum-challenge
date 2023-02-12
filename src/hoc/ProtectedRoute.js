@@ -1,13 +1,15 @@
 
 
 import { useEffect, useState } from "react"
-import { Outlet, Navigate } from "react-router-dom"
+import { Outlet} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 
 const ProtectedRoute = () => {
 const [isLogin, setIsLogin] = useState(false)
 const [loading, setLoading] = useState(true)
+const navigate = useNavigate('');
 
 useEffect(()=>{
     setLoading(true)
@@ -26,7 +28,7 @@ if (loading) {
     return ('please login')
 }
 
-return isLogin ? <Outlet/> : <Navigate to='/login'/>
+return isLogin ? <Outlet/> : navigate('/')
 
     
 }

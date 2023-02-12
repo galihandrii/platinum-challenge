@@ -9,8 +9,7 @@ import Filterdisable from "../components/Filterdisable";
 
 const Detailcar = (props) => {
     
-     
-    return(
+     return(
         <div>
             <Navbar/>
             <div className="div-add"></div>

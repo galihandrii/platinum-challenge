@@ -1,0 +1,220 @@
+@media screen and (max-width: 600px) {
+ .div-authregister {
+    height: 100vh;
+ }
+
+ .p-authcontent {
+   width: 100px;
+   height: 34px;
+   background-color: #cfd4ed;
+   margin-left: 16px;
+   margin-top: 29px;
+ }
+
+ .p-titleauth {
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  margin-left: 16px;
+ }
+
+ .p-nameAuth {
+    margin-left: 16px;
+    margin-top: 30px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+ }
+
+ .input-name {
+  width: 328px;
+  height: 38px;
+  margin-left: 16px;
+ }
+
+ .p-EmailAuth {
+  margin-left: 16px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 20px;
+ }
+
+ .button-signup {
+  width: 328px;
+  height: 36px;
+  border-radius: 2px;
+  margin-top: 32px;
+  margin-left: 16px;
+  background-color:  #0D28A6;
+  border: 1px solid #0D28A6;
+  color: white;
+  cursor: pointer;
+ }
+
+ .div-informationAuth {
+   margin-left: 54px;
+   margin-top: 32px;
+   display: flex;
+   margin-top: 20px;
+   font-size: 14px;
+   font-family: Arial, Helvetica, sans-serif;
+   line-height: 20px;
+ }
+
+ .p-directSignIn {
+   margin-left: 8px;
+   font-size: 14px;
+   font-family: Arial, Helvetica, sans-serif;
+   line-height: 20px;
+   font-weight: 700;
+}
+
+.div-Authcontent2 {
+  display: none;
+}
+
+.div-handleerror {
+  width: 370px;
+  height: 50px;
+  background-color: rgb(238, 72, 72);
+  color: white;
+  margin-left: 5px;
+}
+
+.p-error {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.link-auth {
+  text-decoration: none;
+  color: #000000;
+
+}
+}
+
+@media screen and (min-width: 601px) {
+  .div-authregister {
+    height: 100vh;
+  }
+
+  .div-content {
+    display: flex;
+    height: 100vh;
+  }
+
+  .div-Authcontent1 {
+    height: 100vh;
+    width: 50%;
+    background-color: white;
+  }
+
+  .div-Authcontent2 {
+    height: 100vh;
+    width: 50%;
+    background-color: #0d28a6;
+    position: relative;
+  }
+
+  .p-Auth-register {
+    font-size: 48px;
+    margin-top: 112px;
+    margin-left: 115px;
+    opacity: 70%;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 72px;
+  }
+
+  .img-Auth {
+    position: absolute;
+    width: 568px;
+    height: 410px;
+    left: 115px;
+    top: 233px;
+  }
+
+  .p-authcontent {
+    margin-top: 80px;
+    margin-left: 150px;
+    width: 100px;
+    height: 34px;
+    background-color:  #CFD4ED;
+  }
+
+  .p-titleauth {
+    margin-top: 25px;
+    margin-left: 150px;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+  }
+
+  .p-nameAuth {
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 150px;
+  }
+
+  .input-name {
+    width: 370px;
+    height: 38.15px;
+    border-radius: 5px;
+    border: 1px #000000 10%;
+    margin-left: 150px;
+  }
+
+  .p-EmailAuth {
+    margin-left: 150px;
+    margin-top: 16px;
+  }
+
+  .button-signup {
+    margin-top: 25px;
+    width: 370px;
+    height: 36px;
+    border-radius: 2px;
+    color: white;
+    background-color: #0D28A6;
+    margin-left: 150px;
+    cursor: pointer;
+  }
+
+  .div-informationAuth {
+    display: flex;
+    margin-left: 200px;
+    margin-top: 25px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .p-directSignIn {
+    margin-left: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0D28A6;
+  }
+
+  .div-handleerror {
+    width: 400px;
+    height: 40px;
+    background-color: rgb(238, 72, 72);
+    margin-left: 135px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  .link-auth {
+    text-decoration: none;
+    color: #000000;
+  }
+}
