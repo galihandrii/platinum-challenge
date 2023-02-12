@@ -80,7 +80,7 @@ const Cardescription = () => {
       
         if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
-                <Link to={`/payment/${car.id}`} >
+                <Link to={`/payment-form/${car.id}`} >
                     <Button  variant="success">Lanjutkan Ke Pembayaran</Button>
                 </Link>
             )
