@@ -47,15 +47,25 @@ const Register = () => {
         <div className="div-authregister">
             <div className="div-content">
             <div className="div-Authcontent1">
+
+            <div className="auth-input-data">
+              <div>
                <p className="p-authcontent"></p>
                <p className="p-titleauth">Sign up</p>
+              </div>
+              <div>
                <p className="p-nameAuth">Name</p>
                <input type={'text'} className="input-name" placeholder="Masukkan nama"/>
+              </div>
+              <div>
                <p className="p-EmailAuth">Email</p>
-               <input type={'text'} className="input-name" placeholder="Masukkan Email terlebih dahulu" onChange={Handleemail}/>
-               <p className="p-EmailAuth">Create Password</p>
+               <input type={'text'} className="input-name" placeholder="Masukkan Email terlebih dahulu" onChange={Handleemail}/> 
+              </div>
+              <div>
+              <p className="p-EmailAuth">Create Password</p>
                <input type={"password"} className="input-name" placeholder="Masukkan Password" onChange={Handlepas}/>
-               <div className="div-button-regis">
+              </div>
+              <div className="div-button-regis">
                <button className="button-signup" onClick={HandlesignUp}>Sign Up</button>
                </div>
                <div className="div-informationAuth">
@@ -70,12 +80,15 @@ const Register = () => {
                </div> 
                : null}
             </div>
+            </div>
 
               {/* bates-bates */}
 
             <div className="div-Authcontent2">
-              <p className="p-Auth-register">Binar Car Rental</p>
-              <img src={Landingpage} className="img-Auth"/>
+              <div className="auth-img-content">
+                <div><p className="p-Auth-register">Binar Car Rental</p></div>
+                <div className="img-Auth"><img src={Landingpage}/></div>
+              </div>
             </div>
             </div>
         </div>

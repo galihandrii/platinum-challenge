@@ -37,10 +37,10 @@ const Navbar = () => {
                 <div className="logo"><Link to="/"><img src={logo}/></Link></div>
                  <div className="nav-list">
                      <ul>
-                         <li><a href="#ourservice">Our Service</a></li>
-                         <li><a href="#whyus">Why Us</a></li>
-                         <li><a href="#testimonial">Testimonial</a></li>
-                         <li><a href="#faq">FAQ</a></li>
+                         <li><a className="a-href" href="#ourservice">Our Service</a></li>
+                         <li><a className="a-href"  href="#whyus">Why Us</a></li>
+                         <li><a className="a-href"  href="#testimonial">Testimonial</a></li>
+                         <li><a className="a-href"  href="#faq">FAQ</a></li>
                          {login ?
                          <button className="button-navbar" onClick={Handleremove}>Logout</button>
                           : 

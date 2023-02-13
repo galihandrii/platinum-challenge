@@ -1,6 +1,16 @@
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 600px) {
  .div-authregister {
     height: 100vh;
+    
  }
 
  .p-authcontent {
@@ -43,7 +53,7 @@
  .button-signup {
   width: 328px;
   height: 36px;
-  border-radius: 2px;
+  border-radius: 8px;
   margin-top: 32px;
   margin-left: 16px;
   background-color:  #0D28A6;
@@ -95,6 +105,21 @@
 }
 
 @media screen and (min-width: 601px) {
+.auth-input-data {
+  width: 500px;
+  margin-left: 300px;
+  margin-top: 270px
+
+}
+
+.auth-img-content{
+  
+  width: 856px;
+  height: 856px;
+  margin-left: 100px;
+  margin-top: 100px;
+}
+
   .div-authregister {
     height: 100vh;
   }
@@ -119,8 +144,7 @@
 
   .p-Auth-register {
     font-size: 48px;
-    margin-top: 112px;
-    margin-left: 115px;
+    
     opacity: 70%;
     font-weight: 500;
     color: #FFFFFF;
@@ -128,35 +152,33 @@
   }
 
   .img-Auth {
-    position: absolute;
-    width: 568px;
-    height: 422px;
-    left: 115px;
-    top: 233px;
+  
+   height: 768px;
+   
   }
-
+  .img-Auth img{
+    height: 100%;
+    width: 80%;
+   }
+  
   .p-authcontent {
-    margin-top: 80px;
-    margin-left: 150px;
     width: 100px;
     height: 34px;
     background-color:  #CFD4ED;
   }
 
   .p-titleauth {
-    margin-top: 25px;
-    margin-left: 150px;
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
   }
 
   .p-nameAuth {
-    margin-top: 20px;
+    padding-top: 24px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 20px;
-    margin-left: 150px;
+   
   }
 
   .input-name {
@@ -164,29 +186,27 @@
     height: 38.15px;
     border-radius: 5px;
     border: 1px #000000 10%;
-    margin-left: 150px;
+    margin-top: -12px;
   }
 
   .p-EmailAuth {
-    margin-left: 150px;
-    margin-top: 16px;
+   padding-top: 24px;
   }
 
   .button-signup {
-    margin-top: 25px;
+    margin-top: 36px;
     width: 370px;
     height: 36px;
-    border-radius: 2px;
+    border-radius: 8px;
     color: white;
     background-color: #0D28A6;
-    margin-left: 150px;
     cursor: pointer;
   }
 
   .div-informationAuth {
     display: flex;
-    margin-left: 200px;
-    margin-top: 25px;
+    padding-top: 16px;
+    padding-left: 50px;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
@@ -194,7 +214,7 @@
   }
 
   .p-directSignIn {
-    margin-left: 8px;
+    margin-left: 12px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 14px;
@@ -205,8 +225,7 @@
     width: 400px;
     height: 40px;
     background-color: rgb(238, 72, 72);
-    margin-left: 135px;
-    padding-top: 10px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
