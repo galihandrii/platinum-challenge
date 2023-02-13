@@ -19,8 +19,13 @@ function App() {
       <Route path='/Register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route element={<ProtectedRoute/>}>
-      <Route path='/Payment' element={<Paymentpage/>}/>
+        <Route path='/Payment' element={<Paymentpage/>}/>
      </Route>
+      {/* <Route element={<ProtectedRoute/>}> */}
+        {/* <Route path='/Payment' element={<Paymentpage/>}/> */}
+        <Route path='payment-form/:id' element={<PaymentForm />} />
+        <Route path='/payment-completed/:id' element={<PaymentCompleted />} />
+      {/* </Route> */}
       
     </Routes>
       
