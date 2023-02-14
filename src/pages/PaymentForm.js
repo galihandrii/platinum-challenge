@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import Rectangle36 from '../assets/Rectangle_36.jpg';
 import BackSign from '../assets/fi_arrow-left.png';
-import { Link, useParams } from 'react-router-dom';
+import { defer, Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PaymentForm.css'
 
-export const PaymentForm = (props) => {
+const PaymentForm = (props) => {
+    const [car, setCar] = useState({})
     const [isDisabled, setIsDisabled] = useState(true)
     const {id} = useParams()
+    const navigate = useNavigate()
 
     console.log(id)
 
@@ -21,27 +24,47 @@ export const PaymentForm = (props) => {
         setIsDisabled(false);
       }
 
-    const orderCar = (id) => {
-        const token = localStorage.getItem('token')
-
-        const config = {
-            headers: {
-                access_token: token
-            }
-        }
-
-        axios
-            .get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/`,{id}, config)
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((err) => console.log(err.message))
-
-    }
 
     useEffect(() => {
         orderCar()
-    })
+    },[])
+
+    const orderCar = () => {
+        axios
+            .get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${id}`)
+            .then((res) => {
+                // console.log(res.data)
+                setCar(res.data)
+            })
+            .catch((err) => console.log(err.message))
+    }
+
+    const makeOrder = () => {
+      const token = localStorage.getItem('token')
+
+      const config = {
+        headers: {
+          access_token : token,
+        }
+      }
+      const payload = {
+          "start_rent_at": "2022-10-05",
+          "finish_rent_at": "2022-10-12",
+          "car_id": id
+      }
+
+      axios
+        .post(`https://bootcamp-rent-cars.herokuapp.com/customer/order`,payload, config)
+        .then((res) => {
+          console.log(res.data.id)
+          navigate(`/payment-completed/${res.data.id}`)
+        })
+        .catch((err) => console.log(err.message))
+    }
+
+ 
+
+
 
 
   return (
@@ -56,7 +79,7 @@ export const PaymentForm = (props) => {
             <div className='wrapper-detail-payment'>
                 <div className='wrapper-pembayaran-right'>
                     <img src={BackSign} />
-                    <a href='/Carimobil' className='button-back'>Pembayaran</a>
+                    <a href={`/Detailmobil/${id}`} className='button-back'>Pembayaran</a>
                 </div>
                 <div className='wrapper-pembayaran-left'>
                   <div className='method-payment'>
@@ -92,14 +115,14 @@ export const PaymentForm = (props) => {
                     <div className='col-lg-3 col-md-6'>
                       <div className='tipe-mobil'>
                         <p className='judul-detail-mobil'>Tipe Mobil</p>
-                        <p className='deskripsi-detail-mobil'>Innova</p>
+                        <p className='deskripsi-detail-mobil'>{car.name}</p>
                       </div> 
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='kategori-mobil'>
                         <p className='judul-detail-mobil'>Kategori</p>
-                        <p className='deskripsi-detail-mobil'>1-2 Orang</p>
+                        <p className='deskripsi-detail-mobil'>{car.category}</p>
                       </div>
                     </div>
 
@@ -180,9 +203,9 @@ export const PaymentForm = (props) => {
                     <p className='menu-pembayaran'>Rp.233333</p>
                   </div>
 
-                    <Link to={`/payment-completed/${id}`}>
-                      <button disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
-                    </Link>
+                    {/* <Link to={`/payment-completed/${id}`}> */}
+                      <button onClick={makeOrder} disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
+                    {/* </Link> */}
 
                 </div>
               </div>
@@ -196,3 +219,5 @@ export const PaymentForm = (props) => {
     </>
   )
 }
+
+export default PaymentForm;
