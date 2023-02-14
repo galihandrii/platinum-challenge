@@ -6,6 +6,8 @@ import Detailcar from './pages/Detailcar';
 import Searchcar from './pages/Searchcar';
 import Paymentpage from './pages/Paymentpage';
 import ProtectedRoute from './hoc/ProtectedRoute';
+import { PaymentForm } from './pages/PaymentForm';
+import PaymentCompleted from './pages/PaymentCompleted'
 import Register from './pages/Register';
 import Login from './pages/Login';
 
