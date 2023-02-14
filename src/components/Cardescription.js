@@ -76,9 +76,13 @@ const Cardescription = () => {
     }
 
 
+
+    const FixPrice = PriceTotal()
+
     const handleBtnSetDate = () => {
         localStorage.setItem("start", startDate)
         localStorage.setItem("end", endDate)
+        localStorage.setItem('total price', FixPrice)
     }
 
     function HandleButton() {
