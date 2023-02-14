@@ -109,7 +109,7 @@ const Cardescription = () => {
             localStorage.setItem("end", endDate)
             localStorage.setItem('total price', FixPrice)
 
-            navigate(`/Payment/${res.data.id}`);
+            navigate(`/payment-form/${res.data.id}`);
         } catch (error) {
             console.log(error.message);
            // setError(error.response.data.message)

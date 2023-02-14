@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import Rectangle36 from '../assets/Rectangle_36.jpg';
 import BackSign from '../assets/fi_arrow-left.png';
-import { defer, Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './PaymentForm.css'
+import moment from "moment/moment";
+import 'moment/locale/id'
+import { Card } from 'react-bootstrap';
 
 const PaymentForm = (props) => {
     const [car, setCar] = useState({})
     const [isDisabled, setIsDisabled] = useState(true)
+    const dateStart = moment(localStorage.getItem("start"))
+    const dateEnd = moment(localStorage.getItem("end"))
     const {id} = useParams()
     const navigate = useNavigate()
 
@@ -24,47 +28,54 @@ const PaymentForm = (props) => {
         setIsDisabled(false);
       }
 
-
-    useEffect(() => {
-        orderCar()
-    },[])
-
     const orderCar = () => {
+      const token = localStorage.getItem('token')
+
+      const config = {
+          headers: {
+              access_token: token
+          }
+      }
+
         axios
-            .get(`https://bootcamp-rent-cars.herokuapp.com/customer/car/${id}`)
+            .get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/1839`, config)
             .then((res) => {
-                // console.log(res.data)
+                console.log(res.data)
                 setCar(res.data)
             })
             .catch((err) => console.log(err.message))
+
     }
+
+        useEffect(() => {
+          orderCar()
+      },[])
 
     const makeOrder = () => {
       const token = localStorage.getItem('token')
 
       const config = {
-        headers: {
-          access_token : token,
-        }
+          headers: {
+              access_token: token
+          }
       }
+
       const payload = {
-          "start_rent_at": "2022-10-05",
-          "finish_rent_at": "2022-10-12",
-          "car_id": id
+        "start_rent_at": "2022-10-05",
+        "finish_rent_at": "2022-10-12",
+        "car_id": id
       }
 
       axios
-        .post(`https://bootcamp-rent-cars.herokuapp.com/customer/order`,payload, config)
-        .then((res) => {
-          console.log(res.data.id)
-          navigate(`/payment-completed/${res.data.id}`)
-        })
-        .catch((err) => console.log(err.message))
+      .post(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,payload, config)
+      .then((res) => {
+        console.log(res.data)
+        navigate(`/payment-completed/${res.data.id}`)
+      })
+      .catch((err) => console.log(err))
     }
 
- 
-
-
+    
 
 
   return (
@@ -79,7 +90,7 @@ const PaymentForm = (props) => {
             <div className='wrapper-detail-payment'>
                 <div className='wrapper-pembayaran-right'>
                     <img src={BackSign} />
-                    <a href={`/Detailmobil/${id}`} className='button-back'>Pembayaran</a>
+                    <a href='/Carimobil' className='button-back'>Pembayaran</a>
                 </div>
                 <div className='wrapper-pembayaran-left'>
                   <div className='method-payment'>
@@ -122,21 +133,32 @@ const PaymentForm = (props) => {
                     <div className='col-lg-3 col-md-6'>
                       <div className='kategori-mobil'>
                         <p className='judul-detail-mobil'>Kategori</p>
-                        <p className='deskripsi-detail-mobil'>{car.category}</p>
+                        {/* <p className='deskripsi-detail-mobil'></p> */}
+                        {/* {(() => {
+                           if (car.category === "small") {
+                            return <p>2-4 Orang</p>
+                        } else if (car.category === "Medium") {
+                             return <p>4-6 Orang</p>
+                        } else if (car.category === "large") {
+                            return <p>6-8 Orang</p>
+                        } else {
+                            return '-'
+                             }
+                        }) ()}  */}
                       </div>
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='tanggal-mulai'>
                         <p className='judul-detail-mobil'>Tanggal Mulai Sewa</p>
-                        <p className='deskripsi-detail-mobil'>1 - 2 Agustus</p>
+                        <p className='deskripsi-detail-mobil'>{dateStart.format('LL')}</p>
                       </div>
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='tanggal-akhir'>
                         <p className='judul-detail-mobil'>Tanggal Akhir Sewa</p>
-                        <p className='deskripsi-detail-mobil'>1 - 2 September</p>
+                        <p className='deskripsi-detail-mobil'>{dateEnd.format('LL')}</p>
                       </div>
                     </div>
 
@@ -177,10 +199,10 @@ const PaymentForm = (props) => {
               <div className='card'>
                 <div className='deskripsi-pesanan'>
                   <h5 className='menu-pembayaran'>Nama Mobil</h5>
-                  <p className='pesanan-kategori'>Kategori</p>
+                  <p className='pesanan-kategori'>Kategory</p>
                   <div className='deskripsi-total'>
                       <p>Total</p>
-                      <p className='menu-pembayaran'>Rp.35000</p>
+                      <p className='menu-pembayaran'>price</p>
                   </div>
                   <p className='menu-pembayaran'>Harga</p>
                   <div className='deskripsi-total'>
@@ -200,12 +222,13 @@ const PaymentForm = (props) => {
 
                   <div className='deskripsi-total'>
                     <p className='menu-pembayaran'>Total</p>
-                    <p className='menu-pembayaran'>Rp.233333</p>
+                    <p className='menu-pembayaran'>Total Price</p>
                   </div>
 
-                    {/* <Link to={`/payment-completed/${id}`}> */}
-                      <button onClick={makeOrder} disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
-                    {/* </Link> */}
+                  <button onClick={makeOrder} disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
+                    {/* <Link to={`/payment-completed/${id}`}>
+                      <button disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
+                    </Link> */}
 
                 </div>
               </div>
@@ -220,4 +243,4 @@ const PaymentForm = (props) => {
   )
 }
 
-export default PaymentForm;
+export default PaymentForm
