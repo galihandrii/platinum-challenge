@@ -85,12 +85,44 @@ const Cardescription = () => {
         localStorage.setItem('total price', FixPrice)
     }
 
+
+
+    const handleBtnSetOrder = async(id) => {
+        const token = localStorage.getItem("token")
+        const config = {
+            headers: {
+                access_token: token
+            },
+        }
+        
+        const payload = {
+            start_rent_at: moment(startDate),
+            finish_rent_at: moment(endDate),
+            car_id: car.id,
+        }
+
+        try {
+            const res = await axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/order',payload,config);
+            console.log(res.data)
+            localStorage.setItem('car_id', id)
+            localStorage.setItem("start", startDate)
+            localStorage.setItem("end", endDate)
+            localStorage.setItem('total price', FixPrice)
+
+            navigate(`/Payment/${res.data.id}`);
+        } catch (error) {
+            console.log(error.message);
+           // setError(error.response.data.message)
+        }
+    }
+
+
     function HandleButton() {
       
         if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
                 <Link to={`/payment-form/${car.id}`} >
-                    <Button  onClick={handleBtnSetDate} variant="success">Lanjutkan Ke Pembayaran</Button>
+                    <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
                 </Link>
             )
         }  else  {
