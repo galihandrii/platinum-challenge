@@ -62,7 +62,7 @@ const Cardescription = () => {
 
     const isPrice = car.price
         const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
-        const totalPrice = isPrice * (dateCount)
+        const totalPrice = isPrice * (dateCount + 1)
 
     function PriceTotal(){
         
@@ -76,12 +76,17 @@ const Cardescription = () => {
     }
 
 
+    const handleBtnSetDate = () => {
+        localStorage.setItem("start", startDate)
+        localStorage.setItem("end", endDate)
+    }
+
     function HandleButton() {
       
         if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
                 <Link to={`/payment/${car.id}`} >
-                    <Button  variant="success">Lanjutkan Ke Pembayaran</Button>
+                    <Button  onClick={handleBtnSetDate} variant="success">Lanjutkan Ke Pembayaran</Button>
                 </Link>
             )
         }  else  {
