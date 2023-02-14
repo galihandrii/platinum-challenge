@@ -1,3 +1,5 @@
+
+
 @media screen and (max-width: 600px) {
     .p-graylogo {
         margin-left: 16px;
@@ -93,6 +95,12 @@
     height: 100vh;
   }
 
+  .login-input{
+    width: 400px;
+    margin-left: 280px;
+    margin-top: 300px;
+  }
+
   .div-loginAuth {
     width: 50%;
     height: 100vh;
@@ -107,8 +115,6 @@
 
   .p-Auth-login {
     font-size: 48px;
-    margin-top: 112px;
-    margin-left: 115px;
     opacity: 70%;
     font-weight: 500;
     color: #FFFFFF;
@@ -116,16 +122,14 @@
   }
 
   .p-graylogo {
-    margin-top: 120px;
-    margin-left: 150px;
+    
     width: 100px;
     height: 34px;
     background-color:  #CFD4ED;
   }
 
   .p-titlelogin {
-    margin-top: 25px;
-    margin-left: 150px;
+    
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
@@ -134,44 +138,44 @@
   .p-Emaillogin {
     width: 29px;
     height: 20px;
-    margin-left: 150px;
+    margin-top: 24px;
+    padding-top: 10px;
   }
 
   .input-emaillogin {
-    margin-left: 150px;
+    
     width: 370px;
     height: 38.25px;
-    margin-top: 8.93px;
+    
   }
 
   .p-passwordlogin {
     width: 29px;
     height: 20px;
-    margin-left: 150px;
-    margin-top: 16px;
+    padding-top: 10px;
+    margin-top: 24px;
   }
 
   .input-paslogin {
-    margin-left: 150px;
+   
     width: 370px;
     height: 38.25px;
-    margin-top: 8.93px;
+    
   }
 
    .button-signin {
-    margin-top: 25px;
+    margin-top: 30px;
     width: 370px;
     height: 36px;
-    border-radius: 2px;
+    border-radius: 8px;
     color: white;
     background-color: #0D28A6;
-    margin-left: 150px;
     cursor: pointer;
     border: 1px #0D28A6 solid;
    }
 
    .p-directsignUp {
-    margin-left: 8px;
+    margin-left: 16px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 14px;

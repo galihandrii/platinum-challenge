@@ -48,32 +48,51 @@ const Login = () => {
         <div>
             <div className="div-content">
                 <div className="div-loginAuth">
-                  <p className="p-graylogo"></p>
-                  <p className="p-titlelogin">Welcome Back</p>
-                  <p className="p-Emaillogin">Email</p>
-                  <input type={"text"} className="input-emaillogin" placeholder="Masukkan Email" onChange={Handleislogin}/>
-                  <p className="p-passwordlogin">Password</p>
-                  <input type={"password"} className="input-paslogin" placeholder="Masukkan password" onChange={Handleispas}/>
-                  <div className="div-button-login">
-                  <button className="button-signin" onClick={HandlesignIn}>Sign In</button>
-                  </div>
-                  <div className="div-informationAuth">
+                  <div className="login-input">
+                    <div>
+                    <p className="p-graylogo"></p>
+                    <p className="p-titlelogin">Welcome Back</p>
+                    </div>
+                    <div>
+                    <p className="p-Emaillogin">Email</p>
+                    <input type={"text"} className="input-emaillogin" placeholder="Masukkan Email" onChange={Handleislogin}/>
+                    </div>
+                    <div>
+                    <p className="p-passwordlogin">Password</p>
+                    <input type={"password"} className="input-paslogin" placeholder="Masukkan password" onChange={Handleispas}/>
+                    </div>
+                    <div className="div-button-login">
+                     <button className="button-signin" onClick={HandlesignIn}>Sign In</button>
+                    </div>
+                    <div className="div-informationAuth">
                      <p className="p-informationAuth">Don’t have an account?</p>
                      <Link to={'/Register'} className="link-auth">
                      <p className="p-directsignUp">Sign Up</p>
                      </Link>
+                    </div>
+
+                     {Error ? <div className="div-handleerror">
+                       <p>{Error}</p>
+                      </div>
+                       : null}
                   </div>
-                  {Error ? <div className="div-handleerror">
-                   <p>{Error}</p>
-                  </div>
-                  : null}
+
+
+                 
+                 
+                 
+                  
+                 
+                 
                 </div>
                 
                 {/* bates-bates */}
 
                 <div className="div-content2">
-                    <p className="p-Auth-login">Binar Car Rental</p>
-                    <img src={Landingpage} className="img-Auth"/>
+                  <div className="auth-img-content">
+                  <div><p className="p-Auth-login">Binar Car Rental</p></div>
+                  <div className="img-Auth"> <img src={Landingpage} className="img-Auth"/></div>
+                  </div>
                 </div>
             </div>
         </div>
