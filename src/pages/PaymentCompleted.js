@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import DropZone from '../components/DropZone';
+import CopyToClipboardButton from '../components/TextToClipboard';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Rectangle36 from '../assets/Rectangle_36.jpg';
 import BackSign from '../assets/fi_arrow-left.png';
 import axios from 'axios';
 import Check from '../assets/check.svg';
-import Copy from '../assets/copy.svg';
 import './Paymentcompleted.css'
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
@@ -165,13 +165,13 @@ const PaymentCompleted = (props) => {
                                                 <p className='title'>Nomor Rekeninng</p>
                                                 <div className='copy-thecode'>
                                                     <p className='detail-thecode'>14521</p>
-                                                    <img src={Copy} />
+                                                    <CopyToClipboardButton />
                                                 </div>
 
                                                 <p className='title'>Total Bayar</p>
                                                 <div className='copy-thecode'>
                                                     <p className='detail-thecode'>14521</p>
-                                                    <img src={Copy} />
+                                                    <CopyToClipboardButton />
                                                 </div>
                                             </div>
                                         </div>
