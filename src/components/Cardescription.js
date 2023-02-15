@@ -103,7 +103,7 @@ const Cardescription = () => {
             const res = await axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/order',payload,config);
             console.log(res.data)
 
-            navigate(`/Payment/${res.data.id}`);
+            navigate(`/Payment-form/${res.data.id}`);
         } catch (error) {
             console.log(error.message);
            // setError(error.response.data.message)

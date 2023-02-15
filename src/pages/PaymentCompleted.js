@@ -25,8 +25,15 @@ const PaymentCompleted = (props) => {
     
     const [confirm, setConfirm] = useState(false);
     const navigate = useNavigate()
-    
 
+    const handleUpload = () => {
+        setConfirm(false)
+    }
+    const handleImage = (e) => {
+        setImage(e.target.files[0]);
+        console.log(e.target.files[0])
+    }
+    
     const handleConfirm = () => {
         setConfirm(true);
     }
@@ -48,13 +55,26 @@ const PaymentCompleted = (props) => {
         }
       };
 
-    const handleUpload = () => {
-        setConfirm(false)
-    }
-    const handleImage = (e) => {
-        setImage(e.target.files[0]);
-        console.log(e.target.files[0])
-    }
+    const handleOrderId = async() => {
+        const token = localStorage.getItem("token")
+        const config = {
+            headers: {
+                access_token: token
+            },  
+        }
+
+        try {
+            const res = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,config)
+            console.log(res.data)
+             setCar(res.data);
+        } catch (error) {
+            console.log(error.message);
+        }
+      }
+
+        useEffect(() => {
+          handleOrderId()
+        },[])
 
     const orderCar = () => {
         const token = localStorage.getItem('token')
@@ -119,7 +139,11 @@ const PaymentCompleted = (props) => {
                                 </div>
                             </div>
                             <div className='order-id'>
-                                <p className='order-number'>carid</p>
+                                {
+                                    Object.entries(car).length ? (
+                                        <p className='order-number'>Order Id: {car.id}</p>
+                                    ) : null
+                                }
                             </div>
                         </div>
                     </div>
@@ -170,7 +194,11 @@ const PaymentCompleted = (props) => {
 
                                                 <p className='title'>Total Bayar</p>
                                                 <div className='copy-thecode'>
-                                                    <p className='detail-thecode'>14521</p>
+                                                    {
+                                                        Object.entries(car).length ? (
+                                                            <p className='detail-thecode'>{car.total_price}</p>
+                                                        ) : null
+                                                    }
                                                     <CopyToClipboardButton />
                                                 </div>
                                             </div>
