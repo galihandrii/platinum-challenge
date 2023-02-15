@@ -54,6 +54,15 @@ const PaymentCompleted = (props) => {
           return <Completionist />;
         }
       };
+    
+    const copyToClipboard = async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          alert('Copied to clipboard!');
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+        }
+    };
 
     const handleOrderId = async() => {
         const token = localStorage.getItem("token")
@@ -196,7 +205,7 @@ const PaymentCompleted = (props) => {
                                                 <div className='copy-thecode'>
                                                     {
                                                         Object.entries(car).length ? (
-                                                            <p className='detail-thecode'>{car.total_price}</p>
+                                                            <p onClick={copyToClipboard} className='detail-thecode'>{car.total_price}</p>
                                                         ) : null
                                                     }
                                                     <CopyToClipboardButton />
