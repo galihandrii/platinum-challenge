@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Cardescription.css"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {FiUsers, FiCalendar } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -9,11 +9,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import moment from "moment/moment";
+import 'moment/locale/id'
 
 
 const Cardescription = () => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(null);
+    const navigate = useNavigate()
+    const [dateRange, setDateRange] = useState([null,null]);
+    const [startDate, endDate] = dateRange;
     const {id} = useParams();
     const [car,setCar]= useState({})
     const [description,setDescription] = useState([{
@@ -75,15 +78,8 @@ const Cardescription = () => {
         }
     }
 
-
-
-    const FixPrice = PriceTotal()
-
-    const handleBtnSetDate = () => {
-        localStorage.setItem("start", startDate)
-        localStorage.setItem("end", endDate)
-        localStorage.setItem('total price', FixPrice)
-    }
+    const start = moment(startDate).format('YYYY-MM-DD')
+    const end = moment(endDate).format('YYYY-MM-DD')
 
 
 
@@ -96,18 +92,14 @@ const Cardescription = () => {
         }
         
         const payload = {
-            start_rent_at: moment(startDate),
-            finish_rent_at: moment(endDate),
+            start_rent_at: start,
+            finish_rent_at: end,
             car_id: car.id,
         }
 
         try {
             const res = await axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/order',payload,config);
             console.log(res.data)
-            localStorage.setItem('car_id', id)
-            localStorage.setItem("start", startDate)
-            localStorage.setItem("end", endDate)
-            localStorage.setItem('total price', FixPrice)
 
             navigate(`/payment-form/${res.data.id}`);
         } catch (error) {
@@ -121,9 +113,7 @@ const Cardescription = () => {
       
         if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
-                <Link to={`/payment-form/${car.id}`} >
                     <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
-                </Link>
             )
         }  else  {
             return(
@@ -217,21 +207,17 @@ const Cardescription = () => {
                                 {/*========== Date Picker Zone ===========*/ }
                                 <div className="date-range">
                                 <DatePicker 
-                                selected={startDate} 
-                                onChange={(date) => {
-                                    const [start, end] = date;
-                                    setStartDate(start);
-                                    setEndDate(end);
-                                } 
-                                } 
+                                selectsRange={true}
                                 startDate={startDate}
                                 endDate={endDate}
                                 minDate={new Date()}
-                                selectsRange
+                                onChange={(update) => {
+                                    setDateRange(update);
+                                }}
                                 dateFormat="dd MMMM yyyy"
                                 isClearable={true}
                                 placeholderText="Pilih tanggal mulai dan tanggal akhir sewa"
-                                //showDisabledMonthNavigation
+                                showDisabledMonthNavigation
                                 />
                                 <span><FiCalendar size={20}/></span>
                                 </div>
