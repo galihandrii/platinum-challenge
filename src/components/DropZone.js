@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useDropzone} from 'react-dropzone';
+// import {useDropzone} from 'react-dropzone';
 
 function DropZone() {
   const [files, setFiles] = useState([]);

@@ -9,13 +9,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+ import moment from "moment/moment";
+import 'moment/locale/id'
 
 
 const Cardescription = () => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(null);
+    const [dateRange, setDateRange] = useState([null,null]);
+    const [startDate, endDate] = dateRange;
     const {id} = useParams();
     const [car,setCar]= useState({})
+    const isPrice = car.price
+    const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
+    const totalPrice = isPrice * (dateCount + 1)
     const [description,setDescription] = useState([{
         id: 1,
         include:"apa saja yang termasuk dalam paket misal durasi max 12 jam",
@@ -60,9 +65,7 @@ const Cardescription = () => {
         return new Intl.NumberFormat('de-DE').format(currency)
     }
 
-    const isPrice = car.price
-        const dateCount = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24))
-        const totalPrice = isPrice * (dateCount + 1)
+   
 
     function PriceTotal(){
         
@@ -77,13 +80,10 @@ const Cardescription = () => {
 
 
 
-    const FixPrice = PriceTotal()
+    //const FixPrice = PriceTotal()
 
-    const handleBtnSetDate = () => {
-        localStorage.setItem("start", startDate)
-        localStorage.setItem("end", endDate)
-        localStorage.setItem('total price', FixPrice)
-    }
+    const start = moment(startDate).format('YYYY-MM-DD')
+    const end = moment(endDate).format('YYYY-MM-DD')
 
 
 
@@ -96,20 +96,21 @@ const Cardescription = () => {
         }
         
         const payload = {
-            start_rent_at: moment(startDate),
-            finish_rent_at: moment(endDate),
+            start_rent_at: start,
+            finish_rent_at: end,
             car_id: car.id,
+            
         }
-
+            console.log(payload);
         try {
             const res = await axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/order',payload,config);
             console.log(res.data)
-            localStorage.setItem('car_id', id)
-            localStorage.setItem("start", startDate)
-            localStorage.setItem("end", endDate)
-            localStorage.setItem('total price', FixPrice)
+            // localStorage.setItem('car_id', id)
+            // localStorage.setItem("start", startDate)
+            // localStorage.setItem("end", endDate)
+            // localStorage.setItem('total price', FixPrice)
 
-            navigate(`/payment-form/${res.data.id}`);
+            navigate(`/Payment/${res.data.id}`);
         } catch (error) {
             console.log(error.message);
            // setError(error.response.data.message)
@@ -121,9 +122,9 @@ const Cardescription = () => {
       
         if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
             return(
-                <Link to={`/payment-form/${car.id}`} >
+               // <Link to={`/payment-form/${car.id}`} >
                     <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
-                </Link>
+                //</Link>
             )
         }  else  {
             return(
@@ -217,21 +218,17 @@ const Cardescription = () => {
                                 {/*========== Date Picker Zone ===========*/ }
                                 <div className="date-range">
                                 <DatePicker 
-                                selected={startDate} 
-                                onChange={(date) => {
-                                    const [start, end] = date;
-                                    setStartDate(start);
-                                    setEndDate(end);
-                                } 
-                                } 
+                                selectsRange={true}
                                 startDate={startDate}
                                 endDate={endDate}
                                 minDate={new Date()}
-                                selectsRange
+                                onChange={(update) => {
+                                    setDateRange(update);
+                                }}
                                 dateFormat="dd MMMM yyyy"
                                 isClearable={true}
                                 placeholderText="Pilih tanggal mulai dan tanggal akhir sewa"
-                                //showDisabledMonthNavigation
+                                showDisabledMonthNavigation
                                 />
                                 <span><FiCalendar size={20}/></span>
                                 </div>

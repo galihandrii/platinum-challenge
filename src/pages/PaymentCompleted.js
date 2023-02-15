@@ -138,10 +138,10 @@ const PaymentCompleted = (props) => {
                                             <div className='bagian2-kelas-pembayaran'>
 
                                             {/* react-countdown-below */}
-                                            <Countdown
+                                             <Countdown
                                                 date={Date.now() - 5000}
                                                 renderer={renderer}
-                                            />,
+                                            />, 
 
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@ const PaymentCompleted = (props) => {
                                                         <p className='judul-kanan'>Upload Bukti Pembayaran</p>
                                                         <p className='judul-kanan'>Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa upload bukti bayarmu</p>
 
-                                                        <DropZone />
+                                                        {/* <DropZone /> */}
                                                         
                                                         <button className='btn btn-success w-100' onClick={uploadFile}>Upload</button>
                                                     </>
