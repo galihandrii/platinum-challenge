@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import moment from "moment/moment";
 import 'moment/locale/id'
+import './Paymentf.css'
 
 const PaymentForm = (props) => {
     const [car, setCar] = useState({})
