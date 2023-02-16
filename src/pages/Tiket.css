@@ -1,0 +1,31 @@
+.invoice .invoice-berhasil {
+    text-align: center;
+}
+.invoice-unduh-top {
+    display: flex;
+    justify-content: space-between;
+}
+.wrapper-invoice {
+    width: 50%;
+    margin: auto;
+}
+.wrapper-invoice .image-slip {
+    width: 100%;
+    height: 200px;
+}
+.invoice-unduh-top .title {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+}
+.invoice-unduh-bottom .no-invoice {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+.button-unduh {
+    color: #0D28A6;
+    border-radius: 3px;
+    border: 1px solid #0D28A6;
+    background: transparent;
+}

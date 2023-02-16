@@ -82,25 +82,36 @@ const handleOrderId = async() => {
                     </div>
 
 
-
-                    <div className="invoice">
-                        <div className="invoice-berhasil">
-                            <div><img src={success}/></div>
-                            <div>
-                            <h6>Pembayaran Berhasil</h6>
-                            <p>Tunjukan Invoice ini ke petugas BCR di titik temu</p>
+                    {
+                        Object.entries(tiket).length ? (
+                        <div className="invoice mt-5">
+                            <div className="invoice-berhasil">
+                                <div><img src={success}/></div>
+                                <div>
+                                <h6>Pembayaran Berhasil</h6>
+                                <p>Tunjukan Invoice ini ke petugas BCR di titik temu</p>
+                                </div>
+                            </div>
+                            <div className="wrapper-invoice">
+                                <div className='card p-3'>
+                                    <div className="invoice-unduh">
+                                        <div className="invoice-unduh-top">
+                                            <h6 className="title">Invoice</h6>
+                                            <button className="button-unduh">Unduh</button>
+                                        </div>
+                                        <div className="invoice-unduh-bottom">
+                                            <p className="no-invoice">No.Invoice</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img className="image-slip" src={tiket.slip}/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="invoice-unduh">
-                            <div className="invoice-unduh-top">
-                                <div><h6>Invoice</h6></div>
-                                <div><button>Unduh</button></div>
-                            </div>
-                            <div className="invoice-unduh-bottom">
-
-                            </div>
-                        </div>
-                    </div>
+                        ): null
+                    }
+                    
 
             <Footer/>
         </div>
