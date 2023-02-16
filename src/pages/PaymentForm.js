@@ -8,7 +8,8 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-
+import moment from "moment/moment";
+import 'moment/locale/id'
 
 const PaymentForm = (props) => {
     const [car, setCar] = useState({})
