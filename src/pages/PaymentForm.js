@@ -13,6 +13,8 @@ import 'moment/locale/id'
 
 const PaymentForm = (props) => {
     const [car, setCar] = useState({})
+    const startRent = moment(car.start_rent_at).format('LL')
+    const endRent = moment(car.finish_rent_at).format('LL')
     const [isDisabled, setIsDisabled] = useState(true)
     const dateStart = moment(localStorage.getItem("start"))
     const dateEnd = moment(localStorage.getItem("end"))
@@ -28,55 +30,26 @@ const PaymentForm = (props) => {
         setIsDisabled(false);
       }
 
-    const orderCar = () => {
-      const token = localStorage.getItem('token')
+      const handleOrderId = async() => {
+        const token = localStorage.getItem("token")
+        const config = {
+            headers: {
+                access_token: token
+            },  
+        }
 
-      const config = {
-          headers: {
-              access_token: token
-          }
+        try {
+            const res = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,config)
+            console.log(res.data)
+             setCar(res.data);
+        } catch (error) {
+            console.log(error.message);
+        }
       }
-
-        axios
-            .get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/1839`, config)
-            .then((res) => {
-                console.log(res.data)
-                setCar(res.data)
-            })
-            .catch((err) => console.log(err.message))
-
-    }
 
         useEffect(() => {
-          orderCar()
-      },[])
-
-    const makeOrder = () => {
-      const token = localStorage.getItem('token')
-
-      const config = {
-          headers: {
-              access_token: token
-          }
-      }
-
-      const payload = {
-        "start_rent_at": "2022-10-05",
-        "finish_rent_at": "2022-10-12",
-        "car_id": id
-      }
-
-      axios
-      .post(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,payload, config)
-      .then((res) => {
-        console.log(res.data)
-        navigate(`/payment-completed/${res.data.id}`)
-      })
-      .catch((err) => console.log(err))
-    }
-
-    
-
+          handleOrderId()
+        },[])
 
   return (
     <>
@@ -120,50 +93,58 @@ const PaymentForm = (props) => {
                 <p className='judul-detail'>Detail Pesananmu</p>
               </div>
 
-              <div className='container'>
-                <div className='row'>
+            {
+              Object.entries(car).length ? (
 
+                <div className='container'>
+                <div className='row'>
                     <div className='col-lg-3 col-md-6'>
                       <div className='tipe-mobil'>
                         <p className='judul-detail-mobil'>Tipe Mobil</p>
-                        <p className='deskripsi-detail-mobil'>{car.name}</p>
+                        <p className='deskripsi-detail-mobil'>{car.Car.name}</p>
                       </div> 
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='kategori-mobil'>
                         <p className='judul-detail-mobil'>Kategori</p>
-                        {/* <p className='deskripsi-detail-mobil'></p> */}
-                        {/* {(() => {
-                           if (car.category === "small") {
-                            return <p>2-4 Orang</p>
-                        } else if (car.category === "Medium") {
-                             return <p>4-6 Orang</p>
-                        } else if (car.category === "large") {
-                            return <p>6-8 Orang</p>
-                        } else {
-                            return '-'
-                             }
-                        }) ()}  */}
+                        <p className='deskripsi-detail-mobil'></p> 
+                        
+                          {(() => {
+                              if (car.Car.category === "small") {
+                              return <p>2-4 Orang</p>
+                          } else if (car.Car.category === "Medium") {
+                              return <p>4-6 Orang</p>
+                          } else if (car.Car.category === "large") {
+                              return <p>6-8 Orang</p>
+                          } else {
+                              return '-'
+                              }
+                          })
+                          () }  
                       </div>
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='tanggal-mulai'>
                         <p className='judul-detail-mobil'>Tanggal Mulai Sewa</p>
-                        <p className='deskripsi-detail-mobil'>{dateStart.format('LL')}</p>
+                        <p className='deskripsi-detail-mobil'>{startRent}</p>
                       </div>
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='tanggal-akhir'>
                         <p className='judul-detail-mobil'>Tanggal Akhir Sewa</p>
-                        <p className='deskripsi-detail-mobil'>{dateEnd.format('LL')}</p>
+                        <p className='deskripsi-detail-mobil'>{endRent}</p>
                       </div>
                     </div>
 
                 </div>
               </div>
+              ) : null
+            }
+
+              
           </div>
         </div>
       </div>
@@ -195,19 +176,23 @@ const PaymentForm = (props) => {
               </div>
             </div>
 
-            <div className='col-lg-4 col-md-12'>
+
+            {
+              Object.entries(car).length ? (
+
+                <div className='col-lg-4 col-md-12'>
               <div className='card'>
                 <div className='deskripsi-pesanan'>
-                  <h5 className='menu-pembayaran'>Nama Mobil</h5>
-                  <p className='pesanan-kategori'>Kategory</p>
+                  <h5 className='menu-pembayaran'>{car.Car.name}</h5>
+                  <p className='pesanan-kategori'>{car.Car.category}</p>
                   <div className='deskripsi-total'>
                       <p>Total</p>
-                      <p className='menu-pembayaran'>price</p>
+                      <p className='menu-pembayaran'>{car.Car.price}</p>
                   </div>
                   <p className='menu-pembayaran'>Harga</p>
                   <div className='deskripsi-total'>
                     <p className='desk-menu-pembayaran'>Sewa Mobil Rp.500.000 x 7 Hari</p>
-                    <p>Rp.35000</p>
+                    <p>{car.total_price}</p>
                   </div>
 
                   <p className='menu-pembayaran'>Biaya Lainya</p>
@@ -222,17 +207,20 @@ const PaymentForm = (props) => {
 
                   <div className='deskripsi-total'>
                     <p className='menu-pembayaran'>Total</p>
-                    <p className='menu-pembayaran'>Total Price</p>
+                    <p className='menu-pembayaran'>{car.total_price}</p>
                   </div>
-
-                  <button onClick={makeOrder} disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
-                    {/* <Link to={`/payment-completed/${id}`}>
-                      <button disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
-                    </Link> */}
+                  <Link to={`/payment-completed/${id}`}>
+                    <button disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
+                  </Link>
 
                 </div>
               </div>
             </div>
+
+              ) : null
+            }
+
+            
         </div>
       </div>
     

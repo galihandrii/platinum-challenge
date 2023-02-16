@@ -25,8 +25,15 @@ const PaymentCompleted = (props) => {
     
     const [confirm, setConfirm] = useState(false);
     const navigate = useNavigate()
-    
 
+    const handleUpload = () => {
+        setConfirm(false)
+    }
+    const handleImage = (e) => {
+        setImage(e.target.files[0]);
+        console.log(e.target.files[0])
+    }
+    
     const handleConfirm = () => {
         setConfirm(true);
     }
@@ -47,48 +54,57 @@ const PaymentCompleted = (props) => {
           return <Completionist />;
         }
       };
+    
+    const copyToClipboard = async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          alert('Copied to clipboard!');
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+        }
+    };
 
-    const handleUpload = () => {
-        setConfirm(false)
-    }
-    const handleImage = (e) => {
-        setImage(e.target.files[0]);
-        console.log(e.target.files[0])
-    }
-
-    const orderCar = () => {
-        const token = localStorage.getItem('token')
-  
+    const handleOrderId = async() => {
+        const token = localStorage.getItem("token")
         const config = {
             headers: {
                 access_token: token
-            }
+            },  
         }
-  
-          axios
-              .get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`, config)
-              .then((res) => {
-                  console.log(res)
-                  setCar(res.data)
-              })
-              .catch((err) => console.log(err.message))
-  
+
+        try {
+            const res = await axios.get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`,config)
+            console.log(res.data)
+             setCar(res.data);
+        } catch (error) {
+            console.log(error.message);
+        }
       }
 
-      const uploadFile = () => {
+        useEffect(() => {
+          handleOrderId()
+        },[])
+
+      const uploadPaymentSlip = () => {
+
+        const token = localStorage.getItem('token');
+
+        const configurasi = {
+            headers: {
+                access_token: token,
+            },
+        };
+
+        const formData = new FormData();
+        formData.append('image', image);
 
         axios
-            .put(`https://bootcamp-rent-cars.herokuapp.com/customer/order/{id}/slip/${id}`)
+            .put(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}/slip`,formData, configurasi)
             .then((res) => {
                 console.log(res)
             })
             .catch((err) => console.log(err))
       }
-
-      useEffect(() => {
-        orderCar()
-      },[])
-      
     
   return (
         <div>
@@ -119,7 +135,11 @@ const PaymentCompleted = (props) => {
                                 </div>
                             </div>
                             <div className='order-id'>
-                                <p className='order-number'>carid</p>
+                                {
+                                    Object.entries(car).length ? (
+                                        <p className='order-number'>Order Id: {car.id}</p>
+                                    ) : null
+                                }
                             </div>
                         </div>
                     </div>
@@ -170,7 +190,11 @@ const PaymentCompleted = (props) => {
 
                                                 <p className='title'>Total Bayar</p>
                                                 <div className='copy-thecode'>
-                                                    <p className='detail-thecode'>14521</p>
+                                                    {
+                                                        Object.entries(car).length ? (
+                                                            <p onClick={copyToClipboard} className='detail-thecode'>{car.total_price}</p>
+                                                        ) : null
+                                                    }
                                                     <CopyToClipboardButton />
                                                 </div>
                                             </div>
@@ -205,9 +229,9 @@ const PaymentCompleted = (props) => {
                                                         <p className='judul-kanan'>Upload Bukti Pembayaran</p>
                                                         <p className='judul-kanan'>Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa upload bukti bayarmu</p>
 
-                                                        {/* <DropZone /> */}
+                                                        <DropZone type='file' onChange={handleImage} />
                                                         
-                                                        <button className='btn btn-success w-100' onClick={uploadFile}>Upload</button>
+                                                        <button className='btn btn-success w-100' onClick={uploadPaymentSlip}>Upload</button>
                                                     </>
                                                 ) : <button className='btn btn-success w-100 tombol-kanan' onClick={handleConfirm}>Konfirmasi Pembayaran</button>
                                             }
