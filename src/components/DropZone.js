@@ -3,6 +3,7 @@ import {useDropzone} from 'react-dropzone';
 
 function DropZone() {
   const [files, setFiles] = useState([]);
+  console.log(files);
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
     accept: 'image/*',

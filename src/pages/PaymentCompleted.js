@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import DropZone from '../components/DropZone';
+//import DropZone from '../components/DropZone';
 import CopyToClipboardButton from '../components/TextToClipboard';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -39,7 +39,31 @@ const PaymentCompleted = (props) => {
     }
 
     
-    
+    const [files, setFiles] = useState([]);
+    console.log(files);
+  
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+      accept: 'image/*',
+      onDrop: acceptedFiles => {
+        setFiles(acceptedFiles.map(file => Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })));
+      }
+    });
+  
+    const style = {
+      borderColor: '#6c757d',
+      borderStyle: 'dashed',
+      backgroundColor: '#fafafa',
+      borderWidth: 2,
+      borderRadius: 5,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 100,
+      transition: 'border .2s ease-in-out'
+    };
+  
 
     const Completionist = () => {
         return ( <span>You are good to go!</span> )
@@ -96,12 +120,13 @@ const PaymentCompleted = (props) => {
         };
 
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('slip', files[0]);
 
         axios
             .put(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}/slip`,formData, configurasi)
             .then((res) => {
                 console.log(res)
+                navigate(`/Payment-tiket/${res.data.id}`)
             })
             .catch((err) => console.log(err))
       }
@@ -229,7 +254,22 @@ const PaymentCompleted = (props) => {
                                                         <p className='judul-kanan'>Upload Bukti Pembayaran</p>
                                                         <p className='judul-kanan'>Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa upload bukti bayarmu</p>
 
-                                                        <DropZone type='file' onChange={handleImage} />
+                                                        {/* <DropZone type='file' onChange={handleImage} /> */}
+                                                        <div {...getRootProps()} className="dropzone" style={style}>
+                                                            <input {...getInputProps()} />
+                                                            {isDragActive ?
+                                                                <p>Drop the files here ...</p> :
+                                                                <p>Drag and drop your files here, or click to select files</p>
+                                                            }
+                                                            {files.map(file => (
+                                                                <img
+                                                                key={file.name}
+                                                                src={file.preview}
+                                                                alt={file.name}
+                                                                style={{height: 100, margin: 10}}
+                                                                />
+                                                            ))}
+                                                        </div>
                                                         
                                                         <button className='btn btn-success w-100' onClick={uploadPaymentSlip}>Upload</button>
                                                     </>
