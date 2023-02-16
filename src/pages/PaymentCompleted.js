@@ -54,6 +54,15 @@ const PaymentCompleted = (props) => {
           return <Completionist />;
         }
       };
+    
+    const copyToClipboard = async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          alert('Copied to clipboard!');
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+        }
+    };
 
     const handleOrderId = async() => {
         const token = localStorage.getItem("token")
@@ -76,39 +85,26 @@ const PaymentCompleted = (props) => {
           handleOrderId()
         },[])
 
-    const orderCar = () => {
-        const token = localStorage.getItem('token')
-  
-        const config = {
-            headers: {
-                access_token: token
-            }
-        }
-  
-          axios
-              .get(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}`, config)
-              .then((res) => {
-                  console.log(res)
-                  setCar(res.data)
-              })
-              .catch((err) => console.log(err.message))
-  
-      }
+      const uploadPaymentSlip = () => {
 
-      const uploadFile = () => {
+        const token = localStorage.getItem('token');
+
+        const configurasi = {
+            headers: {
+                access_token: token,
+            },
+        };
+
+        const formData = new FormData();
+        formData.append('image', image);
 
         axios
-            .put(`https://bootcamp-rent-cars.herokuapp.com/customer/order/{id}/slip/${id}`)
+            .put(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}/slip`,formData, configurasi)
             .then((res) => {
                 console.log(res)
             })
             .catch((err) => console.log(err))
       }
-
-      useEffect(() => {
-        orderCar()
-      },[])
-      
     
   return (
         <div>
@@ -196,7 +192,7 @@ const PaymentCompleted = (props) => {
                                                 <div className='copy-thecode'>
                                                     {
                                                         Object.entries(car).length ? (
-                                                            <p className='detail-thecode'>{car.total_price}</p>
+                                                            <p onClick={copyToClipboard} className='detail-thecode'>{car.total_price}</p>
                                                         ) : null
                                                     }
                                                     <CopyToClipboardButton />
@@ -233,9 +229,9 @@ const PaymentCompleted = (props) => {
                                                         <p className='judul-kanan'>Upload Bukti Pembayaran</p>
                                                         <p className='judul-kanan'>Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa upload bukti bayarmu</p>
 
-                                                        {/* <DropZone /> */}
+                                                        <DropZone type='file' onChange={handleImage} />
                                                         
-                                                        <button className='btn btn-success w-100' onClick={uploadFile}>Upload</button>
+                                                        <button className='btn btn-success w-100' onClick={uploadPaymentSlip}>Upload</button>
                                                     </>
                                                 ) : <button className='btn btn-success w-100 tombol-kanan' onClick={handleConfirm}>Konfirmasi Pembayaran</button>
                                             }
