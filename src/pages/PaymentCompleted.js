@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import ReactCountdown from '../components/ReactCountdown'
+import ReactCountdown1 from '../components/ReactCountdown1';
 
 const PaymentCompleted = (props) => {
     const [image, setImage] = useState(null)
@@ -230,11 +231,15 @@ const PaymentCompleted = (props) => {
 
                                     <div className='card mb-5'>
                                         <div className='kelas-pembayarankanan'>
-                                            <p className='judul-kanan'>Klik konfirmasi pembayaran untuk mempercepat proses pengecekan</p>
-
+                                                    
+                                              
                                             {
                                                 confirm ? (
                                                     <>
+                                                        <div className='konfirmasi-pembayaran'>
+                                                            <h6>Konfirmasi Pembayaran</h6>
+                                                            <ReactCountdown1 />
+                                                        </div>
                                                         <p className='judul-kanan'>Terima kasih telah melakukan konfirmasi pembayaran. Pembayaranmu akan segera kami cek tunggu kurang lebih 10 menit untuk mendapatkan konfirmasi.</p>
                                                         <p className='judul-kanan'>Upload Bukti Pembayaran</p>
                                                         <p className='judul-kanan'>Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa upload bukti bayarmu</p>
@@ -258,7 +263,11 @@ const PaymentCompleted = (props) => {
                                                         
                                                         <button className='btn btn-success w-100' onClick={uploadPaymentSlip}>Upload</button>
                                                     </>
-                                                ) : <button className='btn btn-success w-100 tombol-kanan' onClick={handleConfirm}>Konfirmasi Pembayaran</button>
+                                                ) :
+                                                <>
+                                                    <p  className='judul-kanan'>Klik konfirmasi pembayaran untuk mempercepat proses pengecekan</p>
+                                                    <button className='btn btn-success w-100 tombol-kanan' onClick={handleConfirm}>Konfirmasi Pembayaran</button>
+                                                </>
                                             }
 
                                             

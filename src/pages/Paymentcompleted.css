@@ -95,6 +95,10 @@
 .kelas-pembayarankanan {
     padding: 10px;
 }
+.kelas-pembayarankanan .konfirmasi-pembayaran {
+    display: flex;
+    justify-content: space-between;
+}
 .kelas-pembayarankanan img {
     width: 200px;
     height: 50px;
