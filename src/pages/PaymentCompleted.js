@@ -126,9 +126,14 @@ const PaymentCompleted = (props) => {
             .put(`https://bootcamp-rent-cars.herokuapp.com/customer/order/${id}/slip`,formData, configurasi)
             .then((res) => {
                 console.log(res)
-                navigate(`/Payment-tiket/${res.data.id}`)
+                navigate(`/tiket/${res.data.id}`)
             })
             .catch((err) => console.log(err))
+      }
+
+
+      const handleBack = () => {
+         return navigate(-1);
       }
     
   return (
@@ -139,8 +144,8 @@ const PaymentCompleted = (props) => {
                         <div className='container'> 
                             <div className='wrapper-detail-payment'>
                                 <div className='wrapper-pembayaran-right'>
-                                    <img src={BackSign} />
-                                    <a href='/cari-mobil' className='button-back'>BCA Transfer</a>
+                                    <img onClick={handleBack} src={BackSign} />
+                                    <a onClick={handleBack} href='#' className='button-back'>BCA Transfer</a>
                                 </div>
                                 <div className='wrapper-pembayaran-left'>
                                 <div className='method-payment'>

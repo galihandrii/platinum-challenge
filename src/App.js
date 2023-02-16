@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import PaymentForm from './pages/PaymentForm';
 import PaymentCompleted from './pages/PaymentCompleted'
+import Tiket from './pages/Tiket';
 
 
 
@@ -21,8 +22,9 @@ function App() {
       <Route path='/Register' element={<Register/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route element={<ProtectedRoute/>}>
-        <Route path='payment-form/:id' element={<PaymentForm />} />
+        <Route path='/payment-form/:id' element={<PaymentForm />} />
         <Route path='/payment-completed/:id' element={<PaymentCompleted />} />
+        <Route path='/tiket/:id' element={<Tiket/>}/>
      </Route>
     </Routes>
       

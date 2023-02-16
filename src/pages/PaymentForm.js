@@ -51,6 +51,10 @@ const PaymentForm = (props) => {
           handleOrderId()
         },[])
 
+        const handleBack = () => {
+          return navigate(-1);
+       }
+
   return (
     <>
     <Navbar />
@@ -63,7 +67,7 @@ const PaymentForm = (props) => {
             <div className='wrapper-detail-payment'>
                 <div className='wrapper-pembayaran-right'>
                     <img src={BackSign} />
-                    <a href='/Carimobil' className='button-back'>Pembayaran</a>
+                    <a href='#'onClick={handleBack} className='button-back'>Pembayaran</a>
                 </div>
                 <div className='wrapper-pembayaran-left'>
                   <div className='method-payment'>
