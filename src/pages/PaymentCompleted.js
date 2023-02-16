@@ -14,6 +14,7 @@ import './Paymentcompleted.css'
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import ReactCountdown from '../components/ReactCountdown'
 
 const PaymentCompleted = (props) => {
     const [image, setImage] = useState(null)
@@ -171,10 +172,7 @@ const PaymentCompleted = (props) => {
                                                 <p className='judul-1'>Rabu, 19 Mei 2022 jam 13.00 WIB</p>
                                             </div>
                                             <div className='bagian2-kelas-pembayaran'>
-
-                                            {/* react-countdown-below */}
-                                            
-
+                                                <ReactCountdown />
                                             </div>
                                         </div>
                                     </div>
