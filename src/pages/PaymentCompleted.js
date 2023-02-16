@@ -12,11 +12,8 @@ import axios from 'axios';
 import Check from '../assets/check.svg';
 import './Paymentcompleted.css'
 import { useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import Countdown from 'react-countdown';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import './Paymentf.css'
 
 const PaymentCompleted = (props) => {
     const [image, setImage] = useState(null)
@@ -65,19 +62,7 @@ const PaymentCompleted = (props) => {
     };
   
 
-    const Completionist = () => {
-        return ( <span>You are good to go!</span> )
-    }
-
-    const renderer = ({ hours, minutes,seconds, completed }) => {
-        if (completed) {
-          // Render a completed state
-          return <span>{hours}:{minutes}:{seconds}</span>;
-        } else {
-          // Render a countdown
-          return <Completionist />;
-        }
-      };
+    
     
     const copyToClipboard = async () => {
         try {
@@ -188,10 +173,7 @@ const PaymentCompleted = (props) => {
                                             <div className='bagian2-kelas-pembayaran'>
 
                                             {/* react-countdown-below */}
-                                             <Countdown
-                                                date={Date.now() - 5000}
-                                                renderer={renderer}
-                                            />, 
+                                            
 
                                             </div>
                                         </div>
