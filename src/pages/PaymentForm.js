@@ -63,7 +63,9 @@ const PaymentForm = (props) => {
           return new Intl.NumberFormat('de-DE').format(currency)
       }
 
-      
+      const handlePayNow = () => {
+        navigate(`/payment-completed/${id}`)
+    }
       const handleBack = () => {
           return navigate(-1);
        }
@@ -276,9 +278,17 @@ const PaymentForm = (props) => {
                     <p className='menu-pembayaran'>Total</p>
                     <p className='menu-pembayaran'>Rp. {dotCurrency(car.total_price)}</p>
                   </div>
-                  <Link to={`/payment-completed/${id}`}>
-                    <button disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
-                  </Link>
+                  
+                  
+                  {/* <Link to={`/payment-completed/${id}`}>  */}
+                    <button disabled={isDisabled}  onClick={handlePayNow} className='btn btn-success w-100'>Bayar</button>
+                    {/* </Link> */}
+                 
+                 
+                 
+                  
+                 
+                   
 
                 </div>
               </div>

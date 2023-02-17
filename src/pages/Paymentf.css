@@ -132,6 +132,12 @@
     border-radius: 8px;
     
 }
+
+.btn-bayar-dulu{
+   height: 40px;
+}
+
+ 
 .menu-pembayaran {
     font-size: 14px;
     font-weight: 700;

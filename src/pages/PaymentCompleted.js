@@ -68,6 +68,26 @@ const PaymentCompleted = (props) => {
       transition: 'border .2s ease-in-out'
     };
   
+    function displayDeadline() {
+        const today = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate(today.getDate()+1)
+
+    let hour = tomorrow.getHours()
+    let minute = tomorrow.getMinutes()
+
+    const dispDate = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full'}).format(tomorrow); 
+    const dispTime = `Jam ${hour}:${minute}`
+    return (
+        <p className='judul-1'>{dispDate} {dispTime}</p>
+    )
+    }
+    
+
+    
+
+
+
 
     function dotCurrency(number) {
         const currency = number;
@@ -282,7 +302,7 @@ const PaymentCompleted = (props) => {
                                         <div className='kelas-pembayaran'>
                                             <div className='bagian1-kelas-pembayaran'>
                                                 <p className='judul'>Lakukan Pembayaran Sebelum</p>
-                                                <p className='judul-1'>Rabu, 19 Mei 2022 jam 13.00 WIB</p>
+                                                <p className='judul-1'>{displayDeadline()}</p>
                                             </div>
                                             <div className='bagian2-kelas-pembayaran'>
                                                 <ReactCountdown />
