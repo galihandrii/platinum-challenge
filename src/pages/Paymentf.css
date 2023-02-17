@@ -1,4 +1,5 @@
 
+
 .main-wrapper  {
     background: #F1F3FF;
     padding-top: 150px;
@@ -54,13 +55,45 @@
     border: 1px solid black;
 }
 
-
+.bd-left-bank{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    border-bottom: 1px lightgray solid;
+    display: flex;
+    justify-content: start;
+    gap: 30px;
+    margin: 20px 0px;
+}
+.bd-left-bank:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 4px 1px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: start;
+    gap: 30px;
+    margin: 20px 0px;
+}
+.bank-name {
+    padding-top: 4px;
+    text-align: center;
+    width: 70px;
+   border: 1px grey solid;
+   border-radius: 4px; 
+}
+.bank-trf{
+    padding-top: 7px;
+}
 
 
 .detail-order {
     position: relative;
     top: -40px;
+    box-shadow: 1px 1px 4px 1px grey;
+    border-radius: 8px;
+    
 }
+
 .card-detail {
     padding: 10px;
 }
@@ -77,13 +110,14 @@
     line-height: 20px;
 }
 .deskripsi-detail-mobil {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
+   
     color: #8A8A8A;
 }
 .kotak-pembayaran {
-    padding: 10px;
+    padding: 26px 36px;
+    box-shadow: 1px 1px 4px 1px grey;
+    border-radius: 8px;
+    
 }
 .menu-pembayaran {
     font-size: 14px;
@@ -94,6 +128,15 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
+}
+.harga-total-dikalihari{
+    font-size: 14px;
+    line-height: 20px;
+}
+.biaya-lain{
+    font-size: 14px;
+    line-height: 20px;
+    color: lightgreen;
 }
 .tipe-bank {
     display: flex;
@@ -111,6 +154,8 @@
 
 .deskripsi-pesanan {
     padding: 10px;
+    box-shadow: 1px 1px 5px 1px grey;
+    border-radius: 8px;
     
 }
 .deskripsi-total {
@@ -119,7 +164,7 @@
 }
 .pesanan-kategori {
     color: #8A8A8A;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 14px;
 }

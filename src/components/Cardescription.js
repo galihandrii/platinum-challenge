@@ -102,7 +102,8 @@ const Cardescription = () => {
         try {
             const res = await axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/order',payload,config);
             console.log(res.data)
-
+             localStorage.setItem("start", startDate)
+             localStorage.setItem("end", endDate)
             navigate(`/Payment-form/${res.data.id}`);
         } catch (error) {
             console.log(error.message);
@@ -113,7 +114,7 @@ const Cardescription = () => {
 
     function HandleButton() {
       
-        if ((startDate != null) && (endDate != null) && (dateCount <= 7))  {
+        if ((startDate != null) && (endDate != null) && (dateCount <= 6))  {
             return(
                     <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
             )

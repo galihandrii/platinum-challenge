@@ -11,6 +11,8 @@ import { Card } from 'react-bootstrap';
 import moment from "moment/moment";
 import 'moment/locale/id'
 import './Paymentf.css'
+import { FiUser ,FiChevronDown, FiCheck} from "react-icons/fi";
+
 
 const PaymentForm = (props) => {
     const [car, setCar] = useState({})
@@ -19,8 +21,12 @@ const PaymentForm = (props) => {
     const [isDisabled, setIsDisabled] = useState(true)
     const dateStart = moment(localStorage.getItem("start"))
     const dateEnd = moment(localStorage.getItem("end"))
+    const longDate = (Math.round((dateEnd - dateStart) / (1000 * 60 * 60 * 24))) + 1
     const {id} = useParams()
     const navigate = useNavigate()
+    const [isBcaTrue, setIsBcaTrue] = useState(false)
+    const [isBniTrue, setIsBniTrue] = useState(false)
+    const [isMandiriTrue, setIsMandiriTrue] = useState(false)
 
     console.log(id)
 
@@ -52,9 +58,40 @@ const PaymentForm = (props) => {
           handleOrderId()
         },[])
 
-        const handleBack = () => {
+        function dotCurrency(number) {
+          const currency = number;
+          return new Intl.NumberFormat('de-DE').format(currency)
+      }
+
+      
+      const handleBack = () => {
           return navigate(-1);
        }
+
+       const handleBca = () => {
+        setIsBcaTrue(true)
+        setIsBniTrue(false)
+        setIsMandiriTrue(false)
+        localStorage.setItem("bank", "bca")
+        handleClick()
+    }
+
+    const handleBni = () => {
+        setIsBcaTrue(false)
+        setIsBniTrue(true)
+        setIsMandiriTrue(false)
+        localStorage.setItem("bank", "bni")
+        handleClick()
+    }
+
+    const handleMandiri = () => {
+        setIsBcaTrue(false)
+        setIsBniTrue(false)
+        setIsMandiriTrue(true)
+        localStorage.setItem("bank", "mandiri")
+        handleClick()
+    }
+
 
   return (
     <>
@@ -91,11 +128,11 @@ const PaymentForm = (props) => {
 
       </div>
 
-      <div className='container'>
+      <div className='container '>
         <div className='detail-order'>
           <div className='card'>
               <div className='card-detail'>
-                <p className='judul-detail'>Detail Pesananmu</p>
+                <h6 className='judul-detail'>Detail Pesananmu</h6>
               </div>
 
             {
@@ -105,23 +142,23 @@ const PaymentForm = (props) => {
                 <div className='row'>
                     <div className='col-lg-3 col-md-6'>
                       <div className='tipe-mobil'>
-                        <p className='judul-detail-mobil'>Tipe Mobil</p>
+                        <h6>Tipe Mobil</h6>
                         <p className='deskripsi-detail-mobil'>{car.Car.name}</p>
                       </div> 
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='kategori-mobil'>
-                        <p className='judul-detail-mobil'>Kategori</p>
-                        <p className='deskripsi-detail-mobil'></p> 
+                        <h6>Kategori</h6>
+                        
                         
                           {(() => {
                               if (car.Car.category === "small") {
-                              return <p>2-4 Orang</p>
+                              return <p className='deskripsi-detail-mobil'>2-4 Orang</p>
                           } else if (car.Car.category === "Medium") {
-                              return <p>4-6 Orang</p>
+                              return <p className='deskripsi-detail-mobil'>4-6 Orang</p>
                           } else if (car.Car.category === "large") {
-                              return <p>6-8 Orang</p>
+                              return <p className='deskripsi-detail-mobil'>6-8 Orang</p>
                           } else {
                               return '-'
                               }
@@ -132,14 +169,14 @@ const PaymentForm = (props) => {
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='tanggal-mulai'>
-                        <p className='judul-detail-mobil'>Tanggal Mulai Sewa</p>
+                        <h6>Tanggal Mulai Sewa</h6>
                         <p className='deskripsi-detail-mobil'>{startRent}</p>
                       </div>
                     </div>
 
                     <div className='col-lg-3 col-md-6'>
                       <div className='tanggal-akhir'>
-                        <p className='judul-detail-mobil'>Tanggal Akhir Sewa</p>
+                        <h6 >Tanggal Akhir Sewa</h6>
                         <p className='deskripsi-detail-mobil'>{endRent}</p>
                       </div>
                     </div>
@@ -157,26 +194,34 @@ const PaymentForm = (props) => {
       <div className='container'>
         <div className='row'>
 
-            <div className='col-lg-8 col-md-12 mb-2'>
+            <div className='col-lg-8 col-md-12 mb-2 pilih-bank'>
               <div className='card'>
                 <div className='kotak-pembayaran'>
                   <h5 className='menu-pembayaran'>Pilih Bank Transfer</h5>
                   <p className='desk-menu-pembayaran'>Kamu bisa membayar dengan transfer melalui ATM, Internet Banking atau Mobile Banking</p>
 
-                  <div className='tipe-bank'>
-                    <p className='bni-bank'>BCA</p>
-                    <a onClick={handleClick} className='desk-bank desk-menu-pembayaran'>BCA Transfer</a>
-                  </div>
-
-                  <div className='tipe-bank'>
-                    <p className='bni-bank'>BNI</p>
-                    <a onClick={handleClick} className='desk-bank desk-menu-pembayaran'>BNI Transfer</a>
-                  </div>
-
-                  <div className='tipe-bank'>
-                    <p className='bni-bank'>BRI</p>
-                    <a onClick={handleClick} className='desk-bank desk-menu-pembayaran'>BRI Transfer</a>
-                  </div>
+                  <div className="bd-left-bank" onClick={handleBni} >
+                <div className="bank-name"><h6>BNI</h6></div>
+                <div className="bank-trf"><h6>BNI Transfer</h6></div>
+                {
+                    isBniTrue ? <div><FiCheck size={24} className="check-icon-bank"/></div> : null
+                   }
+                </div>
+                <div className="bd-left-bank" onClick={handleBca}>
+                <div className="bank-name"><h6>BCA</h6></div>
+                <div className="bank-trf"><h6>BCA Transfer</h6></div>
+                {
+                    isBcaTrue ? <div><FiCheck size={24} className="check-icon-bank"/></div> : null
+                   }
+                </div>
+                <div className="bd-left-bank" onClick={handleMandiri}>
+                <div className="bank-name"><h6>Mandiri</h6></div>
+                <div className="bank-trf"><h6>Mandiri Transfer</h6></div>
+                {
+                    isMandiriTrue ? <div><FiCheck size={24} className="check-icon-bank"/></div> : null
+                   }
+                </div>
+                 
                 </div>
               </div>
             </div>
@@ -188,31 +233,48 @@ const PaymentForm = (props) => {
                 <div className='col-lg-4 col-md-12'>
               <div className='card'>
                 <div className='deskripsi-pesanan'>
-                  <h5 className='menu-pembayaran'>{car.Car.name}</h5>
-                  <p className='pesanan-kategori'>{car.Car.category}</p>
+                  <h4>{car.Car.name}</h4>
+                  <p className='pesanan-kategori'>
+                     {(() => {
+                                        if (car.Car.category === "small") {
+                                            return <p>2 - 4 orang</p>
+                                        } else if (car.Car.category === "Medium") {
+                                            return <p>4 - 6 orang</p>
+                                        } else if (car.Car.category === "large") {
+                                            return <p>6 - 8 orang</p>
+                                        } else {
+                                            return <p>-</p>
+                                        }
+                                    })()
+                    }
+                  </p>
                   <div className='deskripsi-total'>
-                      <p>Total</p>
-                      <p className='menu-pembayaran'>{car.Car.price}</p>
+                      <p>Total :</p>
+                      <p className='menu-pembayaran'>Rp. {dotCurrency(car.total_price)}</p>
                   </div>
                   <p className='menu-pembayaran'>Harga</p>
                   <div className='deskripsi-total'>
-                    <p className='desk-menu-pembayaran'>Sewa Mobil Rp.500.000 x 7 Hari</p>
-                    <p>{car.total_price}</p>
+                    <p className='desk-menu-pembayaran'>Sewa Mobil Rp. {dotCurrency(car.Car.price)} x {longDate} Hari</p>
+                    <p className='harga-total-dikalihari'>Rp. {dotCurrency(car.total_price)}</p>
                   </div>
 
                   <p className='menu-pembayaran'>Biaya Lainya</p>
                   <div className='deskripsi-total'>
-                    <p className='desk-menu-pembayaran'>Pajak</p>
-                    <p>Termasuk</p>
+                    <ul className='desk-menu-pembayaran'><li>Pajak</li></ul>
+                    <p className='biaya-lain'>Termasuk</p>
+                  </div>
+                  <div className='deskripsi-total'>
+                    <ul className='desk-menu-pembayaran'><li>Biaya Makan Sopir</li></ul>
+                    <p className='biaya-lain'>Termasuk</p>
                   </div>
 
                   <p className='menu-pembayaran'>Belum Termasuk</p>
-                  <p className='desk-menu-pembayaran'>Bensin</p>
-                  <p className='desk-menu-pembayaran'>Tol Dan Parkir</p>
+                  <ul className='desk-menu-pembayaran'><li>Bensin</li></ul>
+                  <ul className='desk-menu-pembayaran'><li>Tol dan parkir</li></ul>
 
                   <div className='deskripsi-total'>
                     <p className='menu-pembayaran'>Total</p>
-                    <p className='menu-pembayaran'>{car.total_price}</p>
+                    <p className='menu-pembayaran'>{dotCurrency(car.total_price)}</p>
                   </div>
                   <Link to={`/payment-completed/${id}`}>
                     <button disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>
