@@ -14,7 +14,7 @@ function CopyToClipboardButton({text}) {
 
   return (
     <button onClick={copyToClipboard} className='copy-button'>
-        <img src={Copy} />
+       <div className='copy-copy'><img src={Copy} /></div> 
     </button>
   );
 }

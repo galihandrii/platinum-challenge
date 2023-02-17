@@ -2,6 +2,8 @@
     background: #F1F3FF;
     padding-top: 150px;
     padding-bottom: 100px;
+    border: 1px dashed red;
+    height: 100px;
 }
 .wrapper-detail-payment {
     display: flex;
@@ -64,15 +66,32 @@
 
 .main-content {
     display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
 }
 .content-left {
-    width: 70%;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    
 }
 .content-right {
     width: 30%;
 }
-
-
+.pc-left-paybefore{
+     box-shadow: 1px 1px 4px 1px grey;
+     border-radius: 10px;
+}
+.pc-left-copyclip{
+    box-shadow: 1px 1px 4px 1px grey;
+    border-radius: 10px;
+}
+.pc-left-instruksi{
+    box-shadow: 1px 1px 4px 1px grey;
+    border-radius: 10px;
+}
 
 
 
@@ -81,6 +100,8 @@
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    border: 1px dashed red;
+    
 }
 .kelas-pembayaran .judul {
     font-size: 14px;
@@ -116,6 +137,7 @@
 }
 .lakukan-transfer {
     padding: 10px;
+    border: 1px dashed red;
 }
 .lakukan-transfer .judul-lakukan-transfer {
     font-size: 14px;
@@ -126,39 +148,58 @@
     display: flex;
 }
 .lakukan-transfer-bank .opsi-1 {
+    text-align: center;
     margin-right: 10px;
+    border: 1px dashed red;
+    height: 40px;
+    width: 70px;
 }
 .opsi-1 .font {
+    height: 36px;
+    padding-top: 8px;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
     border: 1px solid black;
     border-radius: 2px;
 }
+
 .opsi-2 .font-1 {
+    border: 1px dashed red;
     font-size: 12px;
     font-weight: 400;
-    line-height: 18px;
+    
 }
 .copy-thecode .detail-thecode {
-    font-size: 12px;
+    padding: 2px;
+    height: 20px;
+    font-size: 14px;
     font-weight: 300;
     line-height: 18px;
 }
 .copas-thecode .title {
+    padding-top: 12px;
+   
     font-size: 12px;
     font-weight: 300;
     line-height: 18px;
 }
 .copas-thecode .copy-thecode {
+    margin-bottom: 10px;
+    height: 30px;
     display: flex;
     justify-content: space-between;
     border: 1px solid black;
     border-radius: 2px;
+    
     padding: 5px;
 }
+
 .instruksi-pembayaran {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+   
 }
 .instruksi-pembayaran .upside {
     font-size: 14px;
@@ -167,18 +208,27 @@
 .instruksi-pembayaran .cara2pembayaran {
     display: flex;
     justify-content: space-around;
+    gap:40px
 }
 .cara2pembayaran {
     margin-top: 15px;
+    border: red dashed 1px;
+    
 }
 .cara2pembayaran .cara-1 {
+    
+    height: 26px;
+    text-align: center;
+    width: 134px;
     font-size: 14px;
     font-weight: 700;
+    border-bottom: 1px lightgray solid;
 }
-.cara2pembayaran .cara-2 {
-    font-size: 14px;
-    font-weight: 400;
+.penjelasan-pembayaran{
+    border: 1px dashed red;
+    margin-top: 20px;
 }
+
 .instruksi-pembayaran .langkahpembayaran {
     font-size: 14px;
     font-weight: 400;

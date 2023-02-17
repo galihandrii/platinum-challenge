@@ -21,7 +21,7 @@ const PaymentCompleted = (props) => {
     const [image, setImage] = useState(null)
     const [car, setCar] = useState({})
     const {id} = useParams()
-    
+    const bank = localStorage.getItem("bank")
     const [confirm, setConfirm] = useState(false);
     const navigate = useNavigate()
 
@@ -132,7 +132,20 @@ const PaymentCompleted = (props) => {
                             <div className='wrapper-detail-payment'>
                                 <div className='wrapper-pembayaran-right'>
                                     <img onClick={handleBack} src={BackSign} />
-                                    <a onClick={handleBack} href='#' className='button-back'>BCA Transfer</a>
+                                    
+                                    {(()=>{
+                                 if (bank === true && bank === "bca"){
+                                    return<p onClick={handleBack}>BCA Transfer</p>
+                                } else if (bank === true && bank === "bni"){
+                                    return<p onClick={handleBack}>BNI Transfer</p>
+                                } else if (bank === true && bank === "mandiri"){
+                                    return<p onClick={handleBack}>Mandiri Transfer</p>
+                                } else  {
+                                    return<p>-</p>
+                                }
+                                })()
+                                }
+                                    
                                 </div>
                                 <div className='wrapper-pembayaran-left'>
                                 <div className='method-payment'>
@@ -166,7 +179,7 @@ const PaymentCompleted = (props) => {
                             
                                 <div className='content-left'>
                                 
-                                    <div className='card mb-2'>
+                                    <div className='pc-left-paybefore'>
                                         <div className='kelas-pembayaran'>
                                             <div className='bagian1-kelas-pembayaran'>
                                                 <p className='judul'>Lakukan Pembayaran Sebelum</p>
@@ -178,16 +191,37 @@ const PaymentCompleted = (props) => {
                                         </div>
                                     </div>
 
-                                    <div className='card mb-2'>
+                                    <div className='pc-left-copyclip'>
                                         <div className='lakukan-transfer'>
                                             <p className='judul-lakukan-transfer'>Lakukan Transfer Ke</p>
 
                                             <div className='lakukan-transfer-bank'>
                                                 <div className='opsi-1'>
-                                                    <p className='font'>BCA</p>
+                                                    <p className='font'>
+                                                    {(()=>{
+                                                        if (localStorage.getItem("bank") === "bca"){
+                                                            return<p>BCA</p>
+                                                        } else if (localStorage.getItem("bank") === "bni"){
+                                                            return<p>BNI</p>
+                                                        } else if (localStorage.getItem("bank") === "mandiri"){
+                                                            return<p>Mandiri</p>
+                                                        }
+                                                   })()
+                                                     }
+                                                    </p>
                                                 </div>
                                                 <div className='opsi-2'>
-                                                    <p className='font-1'>BCA Transfer</p>
+                                                    
+                                                    {(()=>{
+                                                        if (localStorage.getItem("bank") === "bca"){
+                                                            return<p className='font-1'>BCA Transfer</p>
+                                                        } else if (localStorage.getItem("bank") === "bni"){
+                                                            return<p className='font-1'>BNI Transfer</p>
+                                                        } else if (localStorage.getItem("bank") === "mandiri"){
+                                                            return<p className='font-1'>Mandiri Transfer</p>
+                                                        }
+                                                    })()}
+                                                    
                                                     <p className='font-1'>a.n Binar Car Rental</p>
                                                 </div>
                                             </div>
@@ -206,23 +240,29 @@ const PaymentCompleted = (props) => {
                                                             <p onClick={copyToClipboard} className='detail-thecode'>{car.total_price}</p>
                                                         ) : null
                                                     }
-                                                    <CopyToClipboardButton />
+                                                   <CopyToClipboardButton  />
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className='card mb-2'>
+                                    <div className='pc-left-instruksi'>
                                         <div className='instruksi-pembayaran'>
-                                            <h5 className='upside'>Instruksi Pembayaran</h5>
+                                            <div><h5 className='upside'>Instruksi Pembayaran</h5></div>
+                                            
                                             <div className='cara2pembayaran'>
-                                                <p className='cara-1'>ATM BCA</p>
-                                                <p className='cara-2'>M-BCA</p>
-                                                <p className='cara-2'>BCA Klik</p>
-                                                <p className='cara-2'>Internet Banking</p>
+                                                <div className='cara-1'><h6>ATM BCA</h6></div>
+                                                <div className='cara-1'><h6>M-BCA</h6></div>
+                                                <div className='cara-1'><h6>BCA Klik</h6></div>
+                                                <div className='cara-1'><h6>Internet Banking</h6></div>
+                                                
                                             </div>
+                                            <div className='penjelasan-pembayaran'>
                                             <p className='langkahpembayaran'>Masukan kartu ATM, lalu PIN</p>
                                             <p className='langkahpembayaran'>Pilih menu kemudian transfer </p><p className='langkahpembayaran'>Lakukan saja apa yang anda lakukan</p><p className='langkahpembayaran'>Sekarepmu dewe</p>
+                                            </div>
+                                            
                                         </div>
                                     </div>
 
