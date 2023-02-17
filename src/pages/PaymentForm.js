@@ -104,7 +104,7 @@ const PaymentForm = (props) => {
           <div className='container'> 
             <div className='wrapper-detail-payment'>
                 <div className='wrapper-pembayaran-right'>
-                    <img src={BackSign} />
+                    <img className='button-back' src={BackSign} />
                     <a href='#'onClick={handleBack} className='button-back'>Pembayaran</a>
                 </div>
                 <div className='wrapper-pembayaran-left'>
@@ -274,7 +274,7 @@ const PaymentForm = (props) => {
 
                   <div className='deskripsi-total'>
                     <p className='menu-pembayaran'>Total</p>
-                    <p className='menu-pembayaran'>{dotCurrency(car.total_price)}</p>
+                    <p className='menu-pembayaran'>Rp. {dotCurrency(car.total_price)}</p>
                   </div>
                   <Link to={`/payment-completed/${id}`}>
                     <button disabled={isDisabled} className='menu-pembayaran btn btn-success w-100'>Bayar</button>

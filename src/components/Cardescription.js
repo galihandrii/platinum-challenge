@@ -81,7 +81,7 @@ const Cardescription = () => {
 
     const start = moment(startDate).format('YYYY-MM-DD')
     const end = moment(endDate).format('YYYY-MM-DD')
-
+    const token = localStorage.getItem("token")
 
 
     const handleBtnSetOrder = async(id) => {
@@ -114,14 +114,23 @@ const Cardescription = () => {
 
     function HandleButton() {
       
-        if ((startDate != null) && (endDate != null) && (dateCount <= 6))  {
+        if ((startDate != null) && (endDate != null) && (dateCount <= 6) && (token))  {
             return(
                     <Button  onClick={handleBtnSetOrder} variant="success">Lanjutkan Ke Pembayaran</Button>
             )
-        }  else  {
+        } else if ((startDate != null) && (endDate != null) && (dateCount <= 6) && (!token)){
+           return(
+           <Link to='/login'><Button variant="success">Lanjutkan Ke Pembayaran</Button></Link>
+          ) 
+        }
+         else  {
             return(
                 <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Pilih Tanggal Sewa</Tooltip>}>
+                    
                     <Button variant="success" className="btn-disable-pick-date">Lanjutkan Ke Pembayaran</Button>
+                    
+                    
+
                 </OverlayTrigger>
             ) 
         }

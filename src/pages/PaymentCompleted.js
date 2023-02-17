@@ -24,6 +24,11 @@ const PaymentCompleted = (props) => {
     const bank = localStorage.getItem("bank")
     const [confirm, setConfirm] = useState(false);
     const navigate = useNavigate()
+    const [atm, setAtm] = useState(true)
+    const [mBanking, setMBanking] = useState(false)
+    const [clickBca, setClickBca] = useState(false)
+    const [iBanking, setIBanking] = useState(false)
+
 
     const handleUpload = () => {
         setConfirm(false)
@@ -64,7 +69,10 @@ const PaymentCompleted = (props) => {
     };
   
 
-    
+    function dotCurrency(number) {
+        const currency = number;
+        return new Intl.NumberFormat('de-DE').format(currency)
+    }
     
     const copyToClipboard = async () => {
         try {
@@ -122,6 +130,97 @@ const PaymentCompleted = (props) => {
       const handleBack = () => {
          return navigate(-1);
       }
+
+      const handleAtm = () => {
+        setAtm(true)
+        setMBanking(false)
+        setClickBca(false)
+        setIBanking(false)
+    }
+
+    const handleMBanking = () => {
+        setAtm(false)
+        setMBanking(true)
+        setClickBca(false)
+        setIBanking(false)
+    }
+
+    const handleClickBca = () => {
+        setAtm(false)
+        setMBanking(false)
+        setClickBca(true)
+        setIBanking(false)
+    }
+
+    const handleIBanking = () => {
+        setAtm(false)
+        setMBanking(false)
+        setClickBca(false)
+        setIBanking(true)
+    }
+
+    function displayAtm(){
+        return (
+            <ul className='display-function'>
+                                            <li>Masukkan kartu ATM, lalu PIN</li>
+                                            <li>Pilih menu “Transaksi Lainnya” – ‘Transfer” – “Ke Rek BCA Virtual Account”</li>
+                                            <li>Masukkan nomor BCA Virtual Account: 70020+Order ID<br />
+                                            Contoh:<br />
+                                            No. Peserta: 12345678, maka ditulis 7002012345678</li>
+                                            <li>Layar ATM akan menampilkan konfirmasi, ikuti instruksi untuk menyelesaikan transaksi</li>
+                                            <li>Ambil dan simpanlah bukti transaksi tersebut</li>
+                                        </ul>
+        )
+    }
+
+    function displayMbca() {
+        return(
+            <ul className='display-function'>
+            <li>Login dengan akun Mbanking Anda</li>
+            <li>Pilih menu “m-Transfer”, pilih “BCA Virtual Account”</li>
+            <li>Input Kode Virtual Account: 39107+20+NRP<br />
+            Contoh:<br />
+            No. Peserta: 12345678, maka ditulis 7002012345678</li>
+            <li>Klik menu “Simpan Daftar Transfer” untuk menyimpan nomor pembayaran</li>
+            <li>Klik OK kemudian Kirim/Send</li>
+            <li>Input PIN BCA untuk mengotorisasi</li>
+            <li>Ikuti instruksi untuk menyelesailkan transaksi</li>
+        </ul>
+        )
+    }
+
+    function displayKlikBca() {
+        return(
+            <ul className='display-function'>
+            <li>Buka halaman BCAKlikPay</li>
+            <li>Pilih menu Registrasi</li>
+            <li>Baca Syarat dan Ketentuan</li>
+            <li>Isi data dengan benar</li>
+            <li>Pilih sumber dana pembayaran. Untuk saat ini DTKP hanya mendukung metode pembayaran BCA KlikPay dengan sumber dana dari KlikBCA</li>
+            <li>Anda akan menerima kode aktivasi lewat email dan SMS</li>
+        </ul>
+        )
+    }
+
+    function displayInternetBanking(){
+        return(
+            <ul className='display-function'>
+                                            <li>Login ke KlikBCA Individual</li>
+                                            <li>Pilih Menu “Transfer”</li>
+                                            <li>Pilih Menu “Transfer ke BCA Virtual Account”</li>
+                                            <li>Input Kode Virtual Account: 39107+20+NRP<br />
+                                            Contoh:<br />
+                                            No. Peserta: 12345678, maka ditulis 7002012345678</li>
+                                            <li>Pilih “Lanjutkan” untuk melanjutkan pembayaran</li>
+                                            <li>Masukkan Respon KeyBCA Apply 1</li>
+                                            <li>Ikuti instruksi untuk menyelesaikan transaksi</li>
+                                        </ul>
+        )
+    }
+
+
+
+
     
   return (
         <div>
@@ -131,15 +230,15 @@ const PaymentCompleted = (props) => {
                         <div className='container'> 
                             <div className='wrapper-detail-payment'>
                                 <div className='wrapper-pembayaran-right'>
-                                    <img onClick={handleBack} src={BackSign} />
+                                    <img onClick={handleBack} className='button-back' src={BackSign} />
                                     
                                     {(()=>{
-                                 if (bank === true && bank === "bca"){
-                                    return<p onClick={handleBack}>BCA Transfer</p>
-                                } else if (bank === true && bank === "bni"){
-                                    return<p onClick={handleBack}>BNI Transfer</p>
-                                } else if (bank === true && bank === "mandiri"){
-                                    return<p onClick={handleBack}>Mandiri Transfer</p>
+                                 if ( bank === "bca"){
+                                    return<a onClick={handleBack} className='button-back'>BCA Transfer</a>
+                                } else if ( bank === "bni"){
+                                    return<a onClick={handleBack} className='button-back'>BNI Transfer</a>
+                                } else if ( bank === "mandiri"){
+                                    return<a onClick={handleBack} className='button-back'>Mandiri Transfer</a>
                                 } else  {
                                     return<p>-</p>
                                 }
@@ -222,22 +321,22 @@ const PaymentCompleted = (props) => {
                                                         }
                                                     })()}
                                                     
-                                                    <p className='font-1'>a.n Binar Car Rental</p>
+                                                    <p className='font-2'>a.n Binar Car Rental</p>
                                                 </div>
                                             </div>
 
                                             <div className='copas-thecode'>
-                                                <p className='title'>Nomor Rekeninng</p>
-                                                <div className='copy-thecode'>
-                                                    <p className='detail-thecode'>14521</p>
-                                                    <CopyToClipboardButton />
+                                                <div className='input-title'><p>Nomor Rekening</p></div>
+                                                <div>
+                                                    <input className='input-rek' placeholder='543272829' onClick={copyToClipboard} />
+                                                   
+                                                   
                                                 </div>
-
-                                                <p className='title'>Total Bayar</p>
+                                                <div className='input-title-2'><p>Total Bayar</p></div>
                                                 <div className='copy-thecode'>
                                                     {
                                                         Object.entries(car).length ? (
-                                                            <p onClick={copyToClipboard} className='detail-thecode'>{car.total_price}</p>
+                                                            <p onClick={copyToClipboard} className='detail-thecode'>Rp. {dotCurrency(car.total_price)}</p>
                                                         ) : null
                                                     }
                                                    <CopyToClipboardButton  />
@@ -252,15 +351,32 @@ const PaymentCompleted = (props) => {
                                             <div><h5 className='upside'>Instruksi Pembayaran</h5></div>
                                             
                                             <div className='cara2pembayaran'>
-                                                <div className='cara-1'><h6>ATM BCA</h6></div>
-                                                <div className='cara-1'><h6>M-BCA</h6></div>
-                                                <div className='cara-1'><h6>BCA Klik</h6></div>
-                                                <div className='cara-1'><h6>Internet Banking</h6></div>
+                                                <div  className={atm ? "cara-2":"cara-1"} onClick={handleAtm} ><h6>ATM BCA</h6></div>
+                                                <div  className={mBanking ? "cara-2":"cara-1"}onClick={handleMBanking}><h6>M-BCA</h6></div>
+                                                <div  className={clickBca ? "cara-2":"cara-1"}onClick={handleClickBca}><h6>BCA Klik</h6></div>
+                                                <div  className={iBanking ? "cara-2":"cara-1"}onClick={handleIBanking}><h6>Internet Banking</h6></div>
                                                 
                                             </div>
                                             <div className='penjelasan-pembayaran'>
-                                            <p className='langkahpembayaran'>Masukan kartu ATM, lalu PIN</p>
-                                            <p className='langkahpembayaran'>Pilih menu kemudian transfer </p><p className='langkahpembayaran'>Lakukan saja apa yang anda lakukan</p><p className='langkahpembayaran'>Sekarepmu dewe</p>
+                                                                {(() => {
+                                                    if(atm === true){
+                                                        return(
+                                                            displayAtm()
+                                                        )
+                                                    } else if(mBanking === true){
+                                                        return(
+                                                        displayMbca()
+                                                        )
+                                                    } else if(clickBca === true){
+                                                        return(
+                                                        displayKlikBca()
+                                                        )
+                                                    } else if(iBanking === true){
+                                                        return(
+                                                            displayInternetBanking()
+                                                        )
+                                                    }
+                                                })()}
                                             </div>
                                             
                                         </div>

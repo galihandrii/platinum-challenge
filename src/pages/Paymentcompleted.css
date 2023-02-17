@@ -54,7 +54,10 @@
     border-radius: 50px;
     border: 1px solid black;
 }
-
+.button-back{
+    text-decoration: none;
+    cursor:pointer;
+}
 
 .order-id .order-number {
     font-style: normal;
@@ -79,6 +82,7 @@
 }
 .content-right {
     width: 30%;
+    
 }
 .pc-left-paybefore{
      box-shadow: 1px 1px 4px 1px grey;
@@ -97,10 +101,10 @@
 
 
 .kelas-pembayaran {
-    padding: 10px;
+    padding: 16px;
     display: flex;
     justify-content: space-between;
-    border: 1px dashed red;
+    
     
 }
 .kelas-pembayaran .judul {
@@ -114,7 +118,9 @@
     line-height: 20px;
 }
 .kelas-pembayarankanan {
-    padding: 10px;
+    padding: 24px;
+    box-shadow: 1px 1px 5px 1px grey;
+    border-radius: 8px;
 }
 .kelas-pembayarankanan .konfirmasi-pembayaran {
     display: flex;
@@ -137,7 +143,7 @@
 }
 .lakukan-transfer {
     padding: 10px;
-    border: 1px dashed red;
+    
 }
 .lakukan-transfer .judul-lakukan-transfer {
     font-size: 14px;
@@ -150,7 +156,7 @@
 .lakukan-transfer-bank .opsi-1 {
     text-align: center;
     margin-right: 10px;
-    border: 1px dashed red;
+    
     height: 40px;
     width: 70px;
 }
@@ -165,10 +171,38 @@
 }
 
 .opsi-2 .font-1 {
-    border: 1px dashed red;
+    
     font-size: 12px;
     font-weight: 400;
     
+}
+.font-2{
+    font-size: 12px;
+    font-weight: 400;
+    
+}
+.copas-thecode{
+    margin-top: 4px;
+   
+}
+.input-rek{
+    width: 780px;
+}
+.input-title{
+    height: 30px;
+    padding-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    
+}
+.input-title-2{
+    height: 30px;
+    margin-top: 14px;
+    padding-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
 }
 .copy-thecode .detail-thecode {
     padding: 2px;
@@ -194,7 +228,11 @@
     
     padding: 5px;
 }
-
+.display-function{
+    padding-top: 8px;
+    font-size: 14px;
+    line-height: 24px;
+}
 .instruksi-pembayaran {
     display: flex;
     flex-direction: column;
@@ -212,20 +250,33 @@
 }
 .cara2pembayaran {
     margin-top: 15px;
-    border: red dashed 1px;
+   
     
 }
 .cara2pembayaran .cara-1 {
-    
-    height: 26px;
+    padding-top: 6px;
     text-align: center;
     width: 134px;
     font-size: 14px;
     font-weight: 700;
     border-bottom: 1px lightgray solid;
 }
+.cara-2{
+    padding-top: 6px;
+    text-align: center;
+    width: 134px;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 2px lightseagreen solid;
+}
+
+.cara-1:hover{
+    box-shadow: 1px 1px 4px 1px grey;
+    border-radius: 10px;
+    cursor: pointer;
+}
 .penjelasan-pembayaran{
-    border: 1px dashed red;
+    
     margin-top: 20px;
 }
 
