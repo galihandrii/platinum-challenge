@@ -84,7 +84,20 @@
 .bank-trf{
     padding-top: 7px;
 }
-
+.check-icon-bank{
+    color:green;
+    
+    
+}
+.check-div{
+    width: 30px;
+    margin-left: 480px;
+   
+}
+.check-div-mandiri{
+    width: 30px;
+    margin-left: 452px;
+}
 
 .detail-order {
     position: relative;

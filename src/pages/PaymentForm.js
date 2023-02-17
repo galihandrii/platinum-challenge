@@ -204,21 +204,21 @@ const PaymentForm = (props) => {
                 <div className="bank-name"><h6>BNI</h6></div>
                 <div className="bank-trf"><h6>BNI Transfer</h6></div>
                 {
-                    isBniTrue ? <div><FiCheck size={24} className="check-icon-bank"/></div> : null
+                    isBniTrue ? <div className='check-div'><FiCheck size={30} className="check-icon-bank"/></div> : null
                    }
                 </div>
                 <div className="bd-left-bank" onClick={handleBca}>
                 <div className="bank-name"><h6>BCA</h6></div>
                 <div className="bank-trf"><h6>BCA Transfer</h6></div>
                 {
-                    isBcaTrue ? <div><FiCheck size={24} className="check-icon-bank"/></div> : null
+                    isBcaTrue ? <div className='check-div'><FiCheck size={30} className="check-icon-bank"/></div> : null
                    }
                 </div>
                 <div className="bd-left-bank" onClick={handleMandiri}>
                 <div className="bank-name"><h6>Mandiri</h6></div>
                 <div className="bank-trf"><h6>Mandiri Transfer</h6></div>
                 {
-                    isMandiriTrue ? <div><FiCheck size={24} className="check-icon-bank"/></div> : null
+                    isMandiriTrue ? <div className='check-div-mandiri'><FiCheck size={30} className="check-icon-bank"/></div> : null
                    }
                 </div>
                  
