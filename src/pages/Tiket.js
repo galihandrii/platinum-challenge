@@ -97,7 +97,7 @@ const handleOrderId = async() => {
                                     <div className="invoice-unduh">
                                         <div className="invoice-unduh-top">
                                             <h6 className="title">Invoice</h6>
-                                            <button className="button-unduh">Unduh</button>
+                                            <button  className="button-unduh">Unduh</button>
                                         </div>
                                         <div className="invoice-unduh-bottom">
                                             <p className="no-invoice">No.Invoice</p>
