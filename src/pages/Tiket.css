@@ -29,3 +29,15 @@
     border: 1px solid #0D28A6;
     background: transparent;
 }
+.detail-invoice-info{
+    text-align: left;
+    padding-top: 24px;
+    border-top: 1px grey solid;
+    
+}
+.display-invoice{
+    text-align: center;
+    border: dashed 2px grey;
+    padding: 16px;
+    width: 370px;
+}

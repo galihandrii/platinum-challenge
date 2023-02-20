@@ -7,6 +7,10 @@ import success from '../assets/success.png';
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment/moment";
+import 'moment/locale/id'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 
@@ -14,9 +18,13 @@ const Tiket = () => {
 const [tiket, setTiket] = useState({});
 const navigate = useNavigate()
 const {id} = useParams()
+const getEmail = localStorage.getItem('email')
 
 
-
+function dotCurrency(number) {
+    const currency = number;
+    return new Intl.NumberFormat('de-DE').format(currency)
+}
 
 const handleBack = () => {
     return  navigate(-1)
@@ -42,6 +50,21 @@ const handleOrderId = async() => {
     useEffect(() => {
       handleOrderId()
     },[])
+
+    const startRent = moment(tiket.start_rent_at).format('LL')
+    const endRent = moment(tiket.finish_rent_at).format('LL')
+
+
+    const handleDownloadPdf = () => {
+        const input = document.getElementById('Invoice'); // id yang sama dengan line 128
+        html2canvas(input).then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('p', 'pt', 'a6');
+          pdf.addImage(imgData, 'JPEG', 10, 50);
+          pdf.save('InvoiceMobil'); //nama PDF setelah download
+        });
+      };
+    
 
 
     return (
@@ -97,14 +120,27 @@ const handleOrderId = async() => {
                                     <div className="invoice-unduh">
                                         <div className="invoice-unduh-top">
                                             <h6 className="title">Invoice</h6>
-                                            <button  className="button-unduh">Unduh</button>
+                                            <button onClick={handleDownloadPdf} className="button-unduh">Unduh</button>
                                         </div>
                                         <div className="invoice-unduh-bottom">
                                             <p className="no-invoice">No.Invoice</p>
                                         </div>
                                     </div>
-                                    <div>
-                                        <img className="image-slip" src={tiket.slip}/>
+                                    <div className="display-invoice" id="Invoice">
+                                    <h4>BINAR CAR RENTAL INVOICE</h4>
+
+                                        <div className="detail-invoice"> 
+                                        <div className="detail-invoice-info">
+                                            <p>Order ID     : {tiket.id}</p>
+                                            <p>Email        : {getEmail}</p>
+                                            <p>Jenis Mobil  : {tiket.Car.name}</p>
+                                            <p>Total Bayar  : Rp. {dotCurrency(tiket.total_price)},-</p>
+                                            <p>Mulai Sewa   : {startRent}</p>
+                                            <p>Akhir Sewa   : {endRent}</p>
+                                            <p>© Binar Car Rental</p>
+                                        </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
